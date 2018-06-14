@@ -1,0 +1,77 @@
+<!--index.wxml-->
+<view class="container">
+    <scroll-view class="mainBody">
+        <view class="organization">
+            <view class="top">
+                <view class="logo">
+                    <image class="" src="../../img/redRockLogo.png" mode="scaleToFill"></image>
+                </view>
+                <text class="name">红岩网校工作站</text>
+                <view class="sign">报名</view>
+            </view>
+            <view class="detail">
+                在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。
+            </view>
+        </view>
+        <view class="organization">
+            <view class="top">
+                <view class="logo">
+                    <image class="" src="../../img/redRockLogo.png" mode="scaleToFill"></image>
+                </view>
+                <text class="name">红岩网校工作站</text>
+                <view class="sign">报名</view>
+            </view>
+            <view class="detail">
+                其实我也不知道其实我也不知道其实我也不知道其实我也不不知道不知道也不知道其实我也
+            </view>
+        </view>
+        <view class="organization">
+            <view class="top">
+                <view class="logo">
+                    <image class="" src="../../img/redRockLogo.png" mode="scaleToFill"></image>
+                </view>
+                <text class="name">红岩网校工作站</text>
+                <view class="sign">报名</view>
+            </view>
+            <view class="detail">
+                其实我也不知道其实我也不知道其实我也不知道其实我也不不知道不知道也不知道其实我也
+            </view>
+        </view>
+        <view class="organization">
+            <view class="top">
+                <view class="logo">
+                    <image class="" src="../../img/redRockLogo.png" mode="scaleToFill"></image>
+                </view>
+                <text class="name">红岩网校工作站</text>
+                <view class="sign">报名</view>
+            </view>
+            <view class="detail">
+                其实我也不知道其实我也不知道其实我也不知道其实我也不不知道不知道也不知道其实我也
+            </view>
+        </view>
+        <view class="organization">
+            <view class="top">
+                <view class="logo">
+                    <image class="" src="../../img/redRockLogo.png" mode="scaleToFill"></image>
+                </view>
+                <text class="name">红岩网校工作站</text>
+                <view class="sign">报名</view>
+            </view>
+            <view class="detail">
+                其实我也不知道其实我也不知道其实我也不知道其实我也不不知道不知道也不知道其实我也final
+            </view>
+        </view>
+        <view class="blank"></view>
+    </scroll-view>
+    <view class="nav">
+        <view class="findWrapper">
+            <navigator class="find" url="" open-type="navigate"><image class="findIcon" src="../../img/icon1.png" mode="scaleToFill"></image>发现</navigator>
+        </view>
+        <view class="findWrapper">
+            <navigator class="find" url="" open-type="navigate"><image class="findIcon" src="../../img/icon2.png" mode="scaleToFill"></image>报名</navigator>
+        </view>
+        <view class="findWrapper">
+            <navigator class="find" url="" open-type="navigate"><image class="findIcon" src="../../img/icon3.png" mode="scaleToFill"></image>我的</navigator>
+        </view>
+    </view>
+</view>

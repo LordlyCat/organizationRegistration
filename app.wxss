@@ -1,0 +1,58 @@
+/**app.wxss**/
+
+.container {
+    height: 100vh;
+    /*display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;*/
+    box-sizing: border-box;
+    /*background: #f6f9fc;*/
+}
+
+.nav {
+    position: fixed;
+    width: 750rpx;
+    background: white;
+    height: 98rpx;
+    bottom: 0;
+    box-shadow: 0 5px 20px 2px #D4DAF0;
+}
+
+.findWrapper {
+    display: inline-block;
+    width: 33.33333333%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.find {
+    overflow: hidden;
+    height: 100%;
+    font-size: 22rpx;
+    text-align: center;
+    color: #666666;
+    font-family: PingFangSC-Regular;
+}
+
+.findIcon {
+    display: block;
+    width: 40rpx;
+    height: 43rpx;
+    margin: 1rpx auto;
+    margin-top: 16rpx;
+}
+
+.mainBody {
+    overflow: hidden;
+    width: 100vw;
+    min-height: 100vh;
+    background: #f6f9fc;
+}
+
+.blank {
+    width: 100%;
+    height: 98rpx;
+    background: #f6f9fc;
+}

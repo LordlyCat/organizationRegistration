@@ -1,0 +1,79 @@
+/**index.wxss**/
+
+.organization {
+    overflow: hidden;
+    width: 717rpx;
+    height: 232rpx;
+    margin: 33rpx auto;
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px 0 #E5EDF6;
+    border-radius: 4px;
+}
+
+.top {
+    width: 100%;
+    height: 88rpx;
+    margin-top: 30rpx;
+}
+
+.logo {
+    display: inline-block;
+    float: left;
+    width: 88rpx;
+    height: 88rpx;
+    border: solid 1px lightgray;
+    border-radius: 50%;
+    margin-left: 28rpx;
+}
+
+.logo image {
+    display: block;
+    width: 75%;
+    height: 75%;
+    margin: 12% auto;
+}
+
+.name {
+    float: left;
+    width: 224rpx;
+    height: 88rpx;
+    margin-left: 20rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #333333;
+    line-height: 88rpx;
+}
+
+.sign {
+    display: inline-block;
+    float: right;
+    width: 134rpx;
+    height: 55rpx;
+    margin-right: 32rpx;
+    margin-top: 20rpx;
+    background: #9062F7;
+    box-shadow: 0 5px 16px 1px #D4DAF0;
+    border-radius: 32px;
+    color: #FFFFFF;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 55rpx;
+}
+
+.detail {
+    box-sizing: border-box;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    height: 90rpx;
+    word-break: break-all;
+    margin-top: 7rpx;
+    padding: 8rpx 30rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #666666;
+}
+
+
+
+/*End*/
