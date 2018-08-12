@@ -1,5 +1,9 @@
 /**index.wxss**/
 
+.container {
+    position: relative;
+}
+
 .organization {
     overflow: hidden;
     width: 717rpx;
@@ -73,6 +77,109 @@
     font-size: 26rpx;
     color: #666666;
 }
+
+.cover {
+    position: absolute;
+    width: 750rpx;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.80);
+}
+
+page {
+    overflow: hidden;
+}
+
+.bundle {
+    overflow: hidden;
+    width: 619rpx;
+    height: 643rpx;
+    margin: 243rpx auto;
+    background: white;
+    border-radius: 1%;
+}
+
+.bundle .title {
+    display: block;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #888888;
+    text-align: center;
+    margin-top: 44rpx;
+}
+
+.information {
+    width: 490rpx;
+    border-bottom: solid 1px rgba(216, 216, 216, 0.75);
+    margin: 60rpx auto;
+}
+
+.username {
+    margin-top: 70rpx;
+}
+
+.asterisk {
+    /*display: block;*/
+    color: rgba(255, 2, 25, 0.4);
+    float: left;
+    font-size: 26rpx;
+}
+
+.third {
+    opacity: 0;
+}
+
+.icon {
+    float: left;
+    width: 37rpx;
+    height: 37rpx;
+    margin-top: 6rpx;
+    margin-left: 10rpx;
+}
+
+.bundle input,
+.placeholder {
+    width: 370rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: gray;
+    text-align: center;
+}
+
+.placeholder{
+    opacity: 0.55;
+}
+
+.bundle button {
+    width: 492rpx;
+    height: 85rpx;
+    background: #9062F7;
+    box-shadow: 0 15rpx 35rpx 0 #DFDBF7;
+    border-radius: 40px;
+    font-family: PingFangSC-Regular;
+    font-weight: lighter;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    text-shadow: 0 2rpx 0 #6E36ED;
+    letter-spacing: 10rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

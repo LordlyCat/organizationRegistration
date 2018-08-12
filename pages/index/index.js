@@ -3,7 +3,71 @@
 const app = getApp()
 
 Page({
-    data: {}
+    data: {
+        src: {
+            src_1: "../../img/icon1.png",
+            src_2: "../../img/icon2_on.png",
+            src_3: "../../img/icon3.png"
+        },
+        orgnazition: [{
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }, {
+            name: "红岩网校工作站",
+            dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
+        }],
+        information: {
+            username: '',
+            studentID: '12',
+            phonenumber: '33'
+        }
+    },
+    register: function(e) {
+        console.log(1);
+    },
+    submitInformation: function() {
+        console.log('submit');
+    },
+    name: function(e) {
+        this.setData({
+            information: {
+                name: e.detail.value
+            }
+        })
+        console.log(this.data.information);
+    }
+    // rejectMove: function(e) {
+    //     console.log(123);
+    //     e.preventDefault && e.preventDefault();
+    //     e.returnValue = false;
+    //     e.stopPropagation && e.stopPropagation();
+    //     // console.log('00')
+    //     return false;
+    // }
 })
 
 

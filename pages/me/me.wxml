@@ -1,0 +1,3 @@
+<import src="../../template/template.wxml"/>
+
+<template is="tab" data="{{...src}}"/>
