@@ -4,6 +4,8 @@ const app = getApp()
 
 Page({
     data: {
+        overflow: 'hidden',
+        cover: 'coverOn',
         src: {
             src_1: "../../img/icon1.png",
             src_2: "../../img/icon2_on.png",
@@ -42,23 +44,52 @@ Page({
         }],
         information: {
             username: '',
-            studentID: '12',
-            phonenumber: '33'
+            studentID: '',
+            phonenumber: ''
         }
     },
     register: function(e) {
         console.log(1);
     },
     submitInformation: function() {
-        console.log('submit');
-    },
-    name: function(e) {
         this.setData({
-            information: {
-                name: e.detail.value
-            }
-        })
-        console.log(this.data.information);
+            overflow: 'visible',
+            cover: 'coverOff'
+        });
+        console.log(this.data.information)
+    },
+    getInput: function(e) {
+
+        switch (e.target.id) {
+            case "username":
+                this.setData({
+                    information: {
+                        ...this.data.information,
+                        username: e.detail.value
+                    }
+                })
+                break;
+            case "studentID":
+                this.setData({
+                    information: {
+                        ...this.data.information,
+                        studentID: e.detail.value
+                    }
+                })
+                break;
+            case "phonenumber":
+                this.setData({
+                    information: {
+                        ...this.data.information,
+                        phonenumber: e.detail.value
+                    }
+                })
+                break;
+            default:
+                console.log(false);
+                break;
+        }
+        //console.log(this.data.information)
     }
     // rejectMove: function(e) {
     //     console.log(123);

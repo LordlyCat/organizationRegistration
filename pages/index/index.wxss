@@ -78,7 +78,7 @@
     color: #666666;
 }
 
-.cover {
+.coverOn {
     position: absolute;
     width: 750rpx;
     height: 100%;
@@ -86,9 +86,13 @@
     background: rgba(0, 0, 0, 0.80);
 }
 
-page {
-    overflow: hidden;
+.coverOff {
+    display: none;
 }
+
+/*page {
+    overflow: hidden;
+}*/
 
 .bundle {
     overflow: hidden;
