@@ -1,6 +1,5 @@
 <!--index.wxml-->
-<import src="../../template/template.wxml"/>
-
+<import src="../../template/template.wxml" />
 <view class="container" style="overflow: {{overflow}};">
     <scroll-view class="mainBody">
         <view class="organization" wx:for="{{orgnazition}}">
@@ -15,28 +14,45 @@
         </view>
         <view class="blank"></view>
     </scroll-view>
-    <template is="tab" data="{{...src}}"/>
+    <template is="tab" data="{{...src}}" />
     <view class="{{cover}}">
-        <view class="bundle">
+        <view class="bundle" wx:if="{{switch}}">
             <text class="title">绑定信息</text>
             <view class="information username">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/user.png" mode="scaleToFill"></image>
-                <input id="username" bindinput="getInput" type="text" placeholder="姓名" placeholder-class="placeholder" ></input>
+                <input id="username" bindinput="getInput" type="text" placeholder="姓名" placeholder-class="placeholder"></input>
             </view>
-
             <view class="information studentID">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
-                <input id="studentID" bindinput="getInput" type="number" placeholder="学号" placeholder-class="placeholder" ></input>
+                <input id="studentID" bindinput="getInput" type="number" placeholder="学号" placeholder-class="placeholder"></input>
             </view>
-
             <view class="information phoneNumber">
                 <text class="asterisk third">*</text>
                 <image class="icon" src="../../img/phone.png" mode="scaleToFill"></image>
-                <input id="phonenumber" bindinput="getInput" type="number" placeholder="电话" placeholder-class="placeholder" ></input>
+                <input id="phonenumber" bindinput="getInput" type="number" placeholder="电话" placeholder-class="placeholder"></input>
             </view>
             <button bind:tap="submitInformation">确定</button>
         </view>
+        <view class="join" wx:if="{{!switch}}">
+            <text>选择部门</text>
+            <image class="quitSelect" bind:tap="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
+            <!-- <view class="showSelected">
+                <view class="Selected" wx:for="{{redRockStatement.selected}}">
+                    {{item}}
+                </view>
+            </view> -->
+            <view class="chooseWrapper">
+                <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="chooseStatement">
+                    <picker-view-column>
+                        <view class="statement" wx:for="{{redRockStatement.all}}">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+                <button bind:tap="checkSelected">确定添加</button>
+            </view>
+        </view>
+        <!--         <button bind:tap="ch">确定</button>
+ -->
     </view>
 </view>

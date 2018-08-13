@@ -90,11 +90,13 @@
     display: none;
 }
 
+
 /*page {
     overflow: hidden;
 }*/
 
 .bundle {
+    /*display: none;*/
     overflow: hidden;
     width: 619rpx;
     height: 643rpx;
@@ -151,11 +153,11 @@
     text-align: center;
 }
 
-.placeholder{
+.placeholder {
     opacity: 0.55;
 }
 
-.bundle button {
+.bundle button{
     width: 492rpx;
     height: 85rpx;
     background: #9062F7;
@@ -167,19 +169,58 @@
     color: #FFFFFF;
     text-shadow: 0 2rpx 0 #6E36ED;
     letter-spacing: 10rpx;
+    border: none;
 }
 
+.join {
+    position: relative;
+    overflow: hidden;
+    width: 619rpx;
+    height: 750rpx;
+    background: white;
+    margin: 184rpx auto;
+    border-radius: 1%;
+}
 
+.join text {
+    display: block;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #888888;
+    text-align: center;
+    margin-top: 46rpx;
+}
 
+.quitSelect{
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    top: 34rpx;
+    left: 509rpx;
+}
 
+.statement{
+    text-align: center;
+    font-size: 40rpx;
+    line-height: 80rpx;
+}
 
+.join button{
+    display: block;
+    margin-top: 120rpx;
+    font-size: 28rpx;
+    line-height: 85rpx;
+    border: none;
+}
 
+.chooseWrapper{
+    /*display: block;*/
+    margin-top: 100rpx;
+}
 
-
-
-
-
-
+.showSelected{
+    /*display: block;*/
+}
 
 
 

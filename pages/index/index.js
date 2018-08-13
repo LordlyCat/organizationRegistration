@@ -6,6 +6,7 @@ Page({
     data: {
         overflow: 'hidden',
         cover: 'coverOn',
+        switch: true,
         src: {
             src_1: "../../img/icon1.png",
             src_2: "../../img/icon2_on.png",
@@ -45,18 +46,55 @@ Page({
         information: {
             username: '',
             studentID: '',
-            phonenumber: ''
+            phoneNumber: ''
+        },
+        redRockStatement: {
+            all: [0, 1, 2, 3, 4],
+            selected: [],
+            selectedNow: [0],
+            init: true
         }
     },
     register: function(e) {
-        console.log(1);
+        this.setData({
+            cover: 'coverOn',
+            switch: false
+        })
     },
     submitInformation: function() {
-        this.setData({
-            overflow: 'visible',
-            cover: 'coverOff'
-        });
-        console.log(this.data.information)
+
+        let flag = false;
+        let obj = this.data.information;
+        let regu = "^[ ]+$";
+        let re = new RegExp(regu);
+        Object.keys(obj).forEach(function(key) {
+            if (key !== 'phoneNumber') {
+                if (obj[key].length === 0 || re.test(obj[key])) {
+                    flag = true;
+                    return;
+                }
+            }
+
+            console.log(key, obj[key]);
+        })
+        if (flag) {
+            wx.showModal({
+                title: '绑定失败',
+                content: '必填项内容不能为空',
+                showCancel: false
+            })
+        } else {
+            wx.showToast({
+                title: '绑定成功',
+                icon: 'success',
+                duration: 2000,
+                mask: true
+            })
+            this.setData({
+                overflow: 'visible',
+                cover: 'coverOff'
+            });
+        }
     },
     getInput: function(e) {
 
@@ -77,7 +115,7 @@ Page({
                     }
                 })
                 break;
-            case "phonenumber":
+            case "phoneNumber":
                 this.setData({
                     information: {
                         ...this.data.information,
@@ -90,65 +128,43 @@ Page({
                 break;
         }
         //console.log(this.data.information)
+    },
+    quitSelect: function(e) {
+        this.setData({
+            cover: 'coverOff',
+            switch: false
+        })
+    },
+    chooseStatement: function(e) {
+
+        this.setData({
+            redRockStatement: { ...this.data.redRockStatement,
+                selectedNow: e.detail.value
+
+            }
+        })
+
+    },
+    checkSelected: function(e) {
+
+        let oldSelected = this.data.redRockStatement.selected;
+        let newSelected = newSelected = new Set(oldSelected);
+        let selectedNow = this.data.redRockStatement.selectedNow;
+
+        newSelected.add(this.data.redRockStatement.selectedNow[0]);
+
+        this.setData({
+            redRockStatement: {
+                ...this.data.redRockStatement,
+                selected: newSelected
+            }
+        })
+    },
+    ch: function(e) {
+        console.log(this.data.redRockStatement.selected)
     }
-    // rejectMove: function(e) {
-    //     console.log(123);
-    //     e.preventDefault && e.preventDefault();
-    //     e.returnValue = false;
-    //     e.stopPropagation && e.stopPropagation();
-    //     // console.log('00')
-    //     return false;
-    // }
 })
 
 
-// Page({
-//   data: {
-//     motto: 'Hello World',
-//     userInfo: {},
-//     hasUserInfo: false,
-//     canIUse: wx.canIUse('button.open-type.getUserInfo')
-//   },
-//   //事件处理函数
-//   bindViewTap: function() {
-//     wx.navigateTo({
-//       url: '../logs/logs'
-//     })
-//   },
-//   onLoad: function () {
-//     if (app.globalData.userInfo) {
-//       this.setData({
-//         userInfo: app.globalData.userInfo,
-//         hasUserInfo: true
-//       })
-//     } else if (this.data.canIUse){
-//       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-//       // 所以此处加入 callback 以防止这种情况
-//       app.userInfoReadyCallback = res => {
-//         this.setData({
-//           userInfo: res.userInfo,
-//           hasUserInfo: true
-//         })
-//       }
-//     } else {
-//       // 在没有 open-type=getUserInfo 版本的兼容处理
-//       wx.getUserInfo({
-//         success: res => {
-//           app.globalData.userInfo = res.userInfo
-//           this.setData({
-//             userInfo: res.userInfo,
-//             hasUserInfo: true
-//           })
-//         }
-//       })
-//     }
-//   },
-//   getUserInfo: function(e) {
-//     console.log(e)
-//     app.globalData.userInfo = e.detail.userInfo
-//     this.setData({
-//       userInfo: e.detail.userInfo,
-//       hasUserInfo: true
-//     })
-//   }
-// })
+
+// End
