@@ -1,0 +1,169 @@
+page {
+    background: #F6F8FC;
+}
+
+.me {
+    overflow: hidden;
+    width: 717rpx;
+    height: 187rpx;
+    background: white;
+    box-shadow: 0 8px 20px 0 #E5EDF6;
+    border-radius: 4rpx;
+    margin: 31rpx auto;
+}
+
+.me .head {
+    float: left;
+    width: 124rpx;
+    height: 124rpx;
+    margin-top: 32rpx;
+    margin-left: 36rpx;
+    border-radius: 50%;
+    background: pink;
+}
+
+.me .icon {
+    width: 33rpx;
+    height: 33rpx;
+    float: left;
+    margin-top: 15rpx;
+}
+
+.me .name {
+    display: block;
+    margin-left: 189rpx;
+    margin-top: 38rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    color: #333333;
+    text-align: left;
+}
+
+.me .studentID,
+.me .phone {
+    display: inline-block;
+}
+
+.me .studentID {
+    margin-left: 29rpx;
+    margin-top: 14rpx;
+}
+
+.me .phone {
+    margin-left: 47rpx;
+}
+
+.me .studentID text,
+.me .phone text {
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #666666;
+    text-align: left;
+    line-height: 16rpx;
+    margin-left: 18.6rpx;
+}
+
+.signed {
+    width: 717rpx;
+    height: 103rpx;
+    background: white;
+    margin: 0rpx auto;
+    margin-top: 30rpx;
+    box-shadow: 0 8px 20px 0 #E5EDF6;
+    border-radius: 4rpx;
+}
+
+.signed text {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #666666;
+    text-align: left;
+    line-height: 103rpx;
+    margin-left: 36rpx;
+}
+
+.signed image {
+    float: right;
+    margin-right: 48rpx;
+    margin-top: 36rpx;
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.orgnazitionWrapper {
+    width: 717rpx;
+    background: white;
+    box-shadow: 0 8px 20px 0 #E5EDF6;
+    margin: 14rpx auto;
+}
+
+.orgnazition,
+.statement {
+    width: 645rpx;
+    margin: 0 auto;
+    /*border-bottom: solid 1px lightgray;*/
+}
+
+.orgnazitionName {
+    height: 103rpx;
+    border-bottom: solid 1px lightgray;
+}
+
+.orgnazition text {
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    color: #333333;
+    text-align: left;
+    line-height: 103rpx;
+    margin-left: 2rpx;
+}
+
+.orgnazition .more {
+    width: 15rpx;
+    height: 26rpx;
+    float: right;
+    margin-top: 37rpx;
+    margin-right: 19rpx;
+}
+
+.orgnazition .pick {
+    width: 25rpx;
+    height: 14rpx;
+    float: right;
+    margin-top: 44rpx;
+    margin-right: 15rpx;
+}
+
+.moreTab {
+    display: inline-block;
+    float: right;
+    width: 60rpx;
+    height: 100%;
+}
+
+.statement {
+    border-bottom: solid 1px lightgray;
+}
+
+.statement text {
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    line-height: 103rpx;
+    color: #333333;
+    text-align: left;
+    margin-left: 50rpx;
+}
+
+
+
+.blanck {
+    height: 130rpx;
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+/*end*/

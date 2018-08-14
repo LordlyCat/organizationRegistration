@@ -1,3 +1,40 @@
-<import src="../../template/template.wxml"/>
-
-<template is="tab" data="{{...src}}"/>
+<import src="../../template/template.wxml" />
+<template is="tab" data="{{...src}}" />
+<view class="me">
+    <image class="head" src="https://www.haosix.com/wp-content/uploads/2018/02/timg-2-2.jpg" mode="scaleToFill"></image>
+    <text class="name">金克丝</text>
+    <view class="studentID">
+        <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
+        <text>2018213873</text>
+    </view>
+    <view class="phone">
+        <image class="icon" src="../../img/phone.png" mode="scaleToFill"></image>
+        <text>18720867632</text>
+    </view>
+</view>
+<view class="signed">
+    <text>已报名组织</text>
+    <image class="modify" src="../../img/modify.png" mode="scaleToFill"></image>
+</view>
+<view class="orgnazitionWrapper">
+    <block wx:for="{{orgnazition}}" wx:key="*this">
+        <view class="orgnazition" id="{{index}}">
+            <view class="orgnazitionName">
+                <text>{{item.name}}</text>
+                <view class="moreTab" id="item-{{index}}" bind:tap="showMore" data-name="{{item.name}}" data-index="{{index}}">
+                    <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
+                    <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
+                </view>
+            </view>
+            <block wx:if="{{item.show}}">
+                <view class="statement" wx:for="{{item.statement}}" wx:key="*this">
+                    <text>{{item.name}}</text>
+                    <view class="moreTab" id="i-{{index}}" bind:tap="showMore">
+                        <image class="{{moreClassName1}}" src="{{more1}}" mode="scaleToFill"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+    <view class="blanck"></view>
+</view>

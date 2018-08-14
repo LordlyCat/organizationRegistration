@@ -5,7 +5,7 @@ const app = getApp()
 Page({
     data: {
         overflow: 'hidden',
-        cover: 'coverOn',
+        cover: 'coverOff',
         switch: true,
         src: {
             src_1: "../../img/icon1.png",
@@ -58,6 +58,7 @@ Page({
     register: function(e) {
         this.setData({
             cover: 'coverOn',
+            overflow: 'hidden',
             switch: false
         })
     },
@@ -132,6 +133,7 @@ Page({
     quitSelect: function(e) {
         this.setData({
             cover: 'coverOff',
+            overflow: 'visible',
             switch: false
         })
     },
