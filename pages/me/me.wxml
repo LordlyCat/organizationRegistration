@@ -21,18 +21,26 @@
         <view class="orgnazition" id="{{index}}">
             <view class="orgnazitionName">
                 <text>{{item.name}}</text>
-                <view class="moreTab" id="item-{{index}}" bind:tap="showMore" data-name="{{item.name}}" data-index="{{index}}">
+                <view class="moreTab" id="item-{{index}}" bind:tap="showStatement" data-name="{{item.name}}" data-index="{{index}}">
                     <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                     <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
                 </view>
             </view>
             <block wx:if="{{item.show}}">
-                <view class="statement" wx:for="{{item.statement}}" wx:key="*this">
-                    <text>{{item.name}}</text>
-                    <view class="moreTab" id="i-{{index}}" bind:tap="showMore">
-                        <image class="{{moreClassName1}}" src="{{more1}}" mode="scaleToFill"></image>
+                <block wx:for="{{item.statement}}" wx:key="*this">
+                    <view class="statement">
+                        <text>{{item.name}}</text>
+                        <view class="moreTab" id="i-{{index}}" data-orIndex="{{item.index}}" data-index="{{index}}" bind:tap="showNews">
+                            <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
+                    <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
+                        </view>
                     </view>
-                </view>
+                    <block wx:if="{{item.show}}">
+                        <view class="news" wx:for="{{item.news}}">
+                            如在下边这个例子中，点击 inner view 会先后调用handleTap3和handleTap2(因为tap事件会冒泡到 middle view，而 middle view 阻止了 tap 事件冒泡，不再向父节点传递)，点击 middle view 会触发handleTap2，点击 outer view 会触发handleTap1。
+                        </view>
+                    </block>
+                </block>
             </block>
         </view>
     </block>

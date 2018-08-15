@@ -154,12 +154,20 @@ page {
     margin-left: 50rpx;
 }
 
-
+.news {
+    padding: 40rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 20rpx;
+    color: #666666;
+    text-align: justify;
+    border-bottom: solid 1px lightgray;
+}
 
 .blanck {
     height: 130rpx;
     margin-bottom: 0;
 }
+
 
 
 

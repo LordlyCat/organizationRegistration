@@ -15,21 +15,29 @@ Page({
             name: '红岩网校工作站',
             show: false,
             statement: [{
+                index: 0,
                 name: 'a',
-                show: false
+                show: false,
+                news: ['n1', 'n2']
             }, {
+                index: 0,
                 name: 'b',
-                show: false
+                show: false,
+                news: ['n1', 'n2']
             }]
         }, {
             name: '科联',
             show: false,
             statement: [{
+                index: 1,
                 name: 'q',
-                show: false
+                show: false,
+                news: ['n1', 'n2']
             }, {
+                index: 1,
                 name: 'w',
-                show: false
+                show: false,
+                news: ['n1', 'n2']
             }]
         }],
         showList: [
@@ -49,13 +57,17 @@ Page({
     //     }
     //     console.log(this.data.showList.length)
     // },
-    showMore: function(e) {
-        console.log(e.currentTarget.dataset.name, e.currentTarget.dataset.index);
+    showStatement: function(e) {
+        //console.log(e.currentTarget.dataset.name, e.currentTarget.dataset.index);
         let index = parseInt(e.currentTarget.dataset.index, 10);
         let arr = this.data.orgnazition;
-        console.log(arr[index].show);
+        //console.log(arr[index].show);
         if (arr[index].show) {
             arr[index].show = false;
+            for (let value of arr[index].statement) {
+                //console.log(value)
+                value.show = false;
+            }
         } else {
             arr[index].show = true;
         }
@@ -63,5 +75,22 @@ Page({
         this.setData({
             orgnazition: arr
         });
+    },
+    showNews: function(e) {
+        let index = parseInt(e.currentTarget.dataset.index, 10);
+        let orIndex = parseInt(e.currentTarget.dataset.orindex, 10);
+        let arr = this.data.orgnazition;
+
+        if (arr[orIndex].statement[index].show) {
+            arr[orIndex].statement[index].show = false;
+        } else {
+            arr[orIndex].statement[index].show = true;
+        }
+
+        this.setData({
+            orgnazition: arr
+        });
+
+
     }
 })
