@@ -12,14 +12,27 @@ page {
     margin: 31rpx auto;
 }
 
-.me .head {
+/*.headWrapper{
+    overflow: hidden;
+    display: inline-block;
     float: left;
+    border-radius: 50%;
     width: 124rpx;
     height: 124rpx;
     margin-top: 32rpx;
     margin-left: 36rpx;
     border-radius: 50%;
     background: pink;
+}
+*/
+.me .head {
+    display: block;
+    float: left;
+    width: 124rpx;
+    height: 124rpx;
+    margin-top: 32rpx;
+    margin-left: 36rpx;
+    border-radius: 50%;
 }
 
 .me .icon {

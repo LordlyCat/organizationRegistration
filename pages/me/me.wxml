@@ -1,8 +1,12 @@
 <import src="../../template/template.wxml" />
 <template is="tab" data="{{...src}}" />
 <view class="me">
-    <image class="head" src="https://www.haosix.com/wp-content/uploads/2018/02/timg-2-2.jpg" mode="scaleToFill"></image>
-    <text class="name">金克丝</text>
+    <!-- <view class="headWrapper">
+        <open-data class="head" type="userAvatarUrl"></open-data>
+    </view> -->
+    <image class="head" src="{{avatarUrl}}" mode="scaleToFill"></image>
+    <text class="name">{{nickName}}</text>
+    <!-- <open-data class="name" type="userNickName"></open-data> -->
     <view class="studentID">
         <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
         <text>2018213873</text>
@@ -21,10 +25,12 @@
         <view class="orgnazition" id="{{index}}">
             <view class="orgnazitionName">
                 <text>{{item.name}}</text>
+
                 <view class="moreTab" id="item-{{index}}" bind:tap="showStatement" data-name="{{item.name}}" data-index="{{index}}">
                     <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                     <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
                 </view>
+                <!-- <template is="redSpot" /> -->
             </view>
             <block wx:if="{{item.show}}">
                 <block wx:for="{{item.statement}}" wx:key="*this">

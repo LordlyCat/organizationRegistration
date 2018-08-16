@@ -18,3 +18,7 @@
 <template name="tabBar">
     
 </template>
+
+<template name="redSpot">
+    <view class="redSpot"></view>
+</template>

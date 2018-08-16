@@ -1,0 +1,3 @@
+
+<text>这是启动页</text>
+<button wx:if="{{!anthorize}}" open-type="getUserInfo" style="margin-top: 300rpx;" bindgetuserinfo="getUserInfo">开启报名之旅</button>

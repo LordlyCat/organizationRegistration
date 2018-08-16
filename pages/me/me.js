@@ -1,5 +1,6 @@
 const app = getApp()
-
+//let name = app.globalData.userInfo.nickName;
+//console.log(app.globalData.userInfo)
 Page({
     data: {
         src: {
@@ -7,6 +8,8 @@ Page({
             src_2: "../../img/icon2.png",
             src_3: "../../img/icon3_on.png"
         },
+        nickame: '',
+        avatarUrl: '',
         moreClassName1: 'more',
         more1: '../../img/more.png',
         moreClassName2: 'pick',
@@ -45,18 +48,15 @@ Page({
             [0, 0, 0, 0]
         ]
     },
-    // onReady: function(e) {
-    //     for (let i = 0; i < this.data.orgnazition.length; i++) {
-    //         let arr = [];
-    //         arr.push(0);
-    //         for (let j = 0; j < this.data.orgnazition[i].statement.length; j++) {
-    //             arr.push(0);
-    //             console.log(1)
-    //         }
-    //         this.data.showList.push(arr);
-    //     }
-    //     console.log(this.data.showList.length)
-    // },
+    onReady: function(e) {
+
+        let nickName = wx.getStorageSync('nickName')
+        console.log(wx.getStorageSync('nickName'))
+        this.setData({
+            nickName: wx.getStorageSync('nickName'),
+            avatarUrl: wx.getStorageSync('avatarUrl')
+        })
+    },
     showStatement: function(e) {
         //console.log(e.currentTarget.dataset.name, e.currentTarget.dataset.index);
         let index = parseInt(e.currentTarget.dataset.index, 10);
@@ -90,7 +90,5 @@ Page({
         this.setData({
             orgnazition: arr
         });
-
-
     }
 })

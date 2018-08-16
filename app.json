@@ -1,8 +1,10 @@
 {
 	"pages": [
+		"pages/loading/loading",
 		"pages/index/index",
 		"pages/find/find",
 		"pages/me/me"
+
 	],
 	"window": {
 		"backgroundTextStyle": "light",

@@ -56,3 +56,13 @@
     height: 98rpx;
     background: #f6f9fc;
 }
+
+.redSpot{
+    float: right;
+    display: inline-block;
+    margin-top: 40rpx;
+    width: 12rpx;
+    height: 12rpx;
+    background: red;
+    border-radius: 50%;
+}
