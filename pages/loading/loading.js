@@ -2,17 +2,21 @@ const app = getApp();
 
 Page({
     data: {
-        anthorize: true
+        anthorize: app.globalData.anthorize
     },
     onLoad: function() {
         let that = this;
         wx.getSetting({
             success: function(e) {
-                if (e.authSetting['scope.userInfo']) {
-                    wx.navigateTo({
-                        url: '../index/index'
-                    })
+
+                if (wx.getStorageSync('nickName')) {
+                    setTimeout(() => {
+                        wx.navigateTo({
+                            url: '../index/index'
+                        })
+                    }, 1500)
                 } else {
+                    app.globalData.anthorize = false;
                     that.setData({
                         anthorize: false
                     })

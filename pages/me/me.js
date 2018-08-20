@@ -10,6 +10,8 @@ Page({
         },
         nickame: '',
         avatarUrl: '',
+        stuid: '',
+        phonenum: '',
         moreClassName1: 'more',
         more1: '../../img/more.png',
         moreClassName2: 'pick',
@@ -48,13 +50,97 @@ Page({
             [0, 0, 0, 0]
         ]
     },
+    dealData: function(arr) { //数据处理
+        let data = [];
+
+        arr.forEach((item) => {
+            let oname = item.oname;
+            let l = data.length;
+
+            if (l === 0) {
+                data.push({
+                    oname: item.oname,
+                    show: false,
+                    statement: [{
+                        index: l,
+                        dname: item.dname,
+                        show: false,
+                        news: item.info,
+                        see: item.see
+                    }]
+
+                })
+                return;
+            }
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].oname === oname) {
+                    data[i].statement.push({
+                        index: i,
+                        dname: item.dname,
+                        show: false,
+                        news: item.info,
+                        see: item.see
+                    })
+                    break;
+                }
+                if (data[i].oname !== oname && i === data.length - 1) {
+                    data.push({
+                        oname: item.oname,
+                        show: false,
+                        statement: [{
+                            index: l,
+                            dname: item.dname,
+                            show: false,
+                            news: item.info,
+                            see: item.see
+                        }]
+
+                    })
+                    break;
+                }
+            }
+        })
+        console.log(data);
+        return data;
+    },
+    onLoad: function(e) {
+        let that = this;
+        wx.request({
+            // 必需
+            url: 'https://bmtest.redrock.team/msg/cinfo',
+            data: {
+                openid: wx.getStorageSync('openid')
+            },
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                authorization: wx.getStorageSync('authorization')
+            },
+            method: 'POST',
+            success: (res) => {
+                console.log(res);
+
+                that.setData({
+                    orgnazition: that.dealData(res.data)
+                })
+            },
+            fail: (res) => {
+
+            },
+            complete: (res) => {
+
+            }
+        })
+    },
     onReady: function(e) {
 
         let nickName = wx.getStorageSync('nickName')
         console.log(wx.getStorageSync('nickName'))
         this.setData({
             nickName: wx.getStorageSync('nickName'),
-            avatarUrl: wx.getStorageSync('avatarUrl')
+            avatarUrl: wx.getStorageSync('avatarUrl'),
+            stuid: wx.getStorageSync('stuid'),
+            phonenum: wx.getStorageSync('phonenum'),
         })
     },
     showStatement: function(e) {

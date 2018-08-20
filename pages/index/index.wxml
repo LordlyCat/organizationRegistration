@@ -2,7 +2,9 @@
 <import src="../../template/template.wxml" />
 <view class="container" style="overflow: {{overflow}};">
     <scroll-view class="mainBody">
-        
+    <view class="loading">
+    
+    </view>
         <view class="organization" wx:for="{{orgnazition}}" wx:key="*this">
             <view class="top">
                 <view class="logo">
@@ -53,6 +55,7 @@
                     </picker-view-column>
                 </picker-view>
                 <button bind:tap="checkSelected">确定</button>
+                
             </view>
         </view>
         <!--         <button bind:tap="ch">确定</button>

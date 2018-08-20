@@ -6,7 +6,7 @@
             <view class="box">
                 <image class="" src="../../img/redrockImg.png" mode="scaleToFill"></image>
                 <text class="orgnazitionName">{{item.name}}</text>
-                <text class="dec">其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道其实我也不知道{{item.dec}}</text>
+                <text class="dec">{{item.dec}}</text>
             </view>
         </swiper-item>
     </swiper>

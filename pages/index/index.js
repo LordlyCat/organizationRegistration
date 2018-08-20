@@ -61,6 +61,11 @@ Page({
                 cover: 'coverOn'
             })
         }
+        if (app.globalData.checkFlag) {
+            this.setData({
+                cover: 'coverOff'
+            })
+        }
         // wx.request({
         //     // 必需
         //     url: 'http://eycjvk.natappfree.cc/user/adduser',
@@ -122,9 +127,12 @@ Page({
                 showCancel: false
             })
         } else {
-
+            wx.showLoading({
+                title: '加载中',
+                mask: true
+            })
             wx.request({
-                url: 'http://h6ekj4.natappfree.cc/user/adduser',
+                url: 'https://bmtest.redrock.team/user/adduser',
                 data: {
                     ...obj,
                     openid: wx.getStorageSync('openid')
@@ -134,9 +142,10 @@ Page({
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 success: (res) => {
-                    //console.log("seccess", res.header.authorization);
+                    console.log("seccess", res.header.authorization);
                     if (!res.header.authorization) {
                         console.log("sign fail");
+                        wx.hideLoading();
                         wx.showModal({
                             title: '绑定失败',
                             content: '请重试',
@@ -148,6 +157,7 @@ Page({
                         key: "authorization",
                         data: res.header.authorization
                     })
+                    wx.hideLoading();
                     wx.showToast({
                         title: '绑定成功',
                         icon: 'success',
@@ -236,9 +246,13 @@ Page({
         console.log({ ...this.data.selected,
             openid: wx.getStorageSync('openid')
         });
+        wx.showLoading({
+            title: '加载中',
+            mask: true
+        })
         wx.request({
             // 必需
-            url: '',
+            url: 'https://bmtest.redrock.team/msg/choose',
             data: {
                 ...this.data.selected,
                 openid: wx.getStorageSync('openid')
@@ -249,10 +263,27 @@ Page({
                 authorization: wx.getStorageSync('authorization')
             },
             success: (res) => {
-
+                console.log(res);
+                if (res.data == 200) {
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '报名成功',
+                        icon: 'success',
+                        duration: 2000,
+                        mask: true
+                    })
+                } else {
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '报名失败',
+                        icon: 'success',
+                        duration: 2000,
+                        mask: true
+                    })
+                }
             },
             fail: (res) => {
-
+                console.log(res);
             },
             complete: (res) => {
 

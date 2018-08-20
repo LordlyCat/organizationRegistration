@@ -9,11 +9,11 @@
     <!-- <open-data class="name" type="userNickName"></open-data> -->
     <view class="studentID">
         <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
-        <text>2018213873</text>
+        <text>{{stuid}}</text>
     </view>
     <view class="phone">
         <image class="icon" src="../../img/phone.png" mode="scaleToFill"></image>
-        <text>18720867632</text>
+        <text>{{phonenum}}</text>
     </view>
 </view>
 <view class="signed">
@@ -24,7 +24,7 @@
     <block wx:for="{{orgnazition}}" wx:key="*this">
         <view class="orgnazition" id="{{index}}">
             <view class="orgnazitionName">
-                <text>{{item.name}}</text>
+                <text>{{item.oname}}</text>
 
                 <view class="moreTab" id="item-{{index}}" bind:tap="showStatement" data-name="{{item.name}}" data-index="{{index}}">
                     <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
@@ -35,7 +35,7 @@
             <block wx:if="{{item.show}}">
                 <block wx:for="{{item.statement}}" wx:key="*this">
                     <view class="statement">
-                        <text>{{item.name}}</text>
+                        <text>{{item.dname}}</text>
                         <view class="moreTab" id="i-{{index}}" data-orIndex="{{item.index}}" data-index="{{index}}" bind:tap="showNews">
                             <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                     <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
