@@ -11,5 +11,29 @@
 		"navigationBarBackgroundColor": "#fff",
 		"navigationBarTitleText": "组织报名",
 		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+	"backgroundColor": "#ffffff",
+		"borderStyle": "white",
+		"selectedColor": "#9062F7",
+		"list": [{
+			"pagePath": "pages/find/find",
+			"text": "发现",
+			"iconPath": "./img/icon1.png",
+			"selectedIconPath": "./img/icon1_on.png",
+			"color": "#666666"
+		}, {
+			"pagePath": "pages/index/index",
+			"text": "首页",
+			"iconPath": "./img/icon2.png",
+			"selectedIconPath": "./img/icon2_on.png",
+			"color": "#666666"
+		}, {
+			"pagePath": "pages/me/me",
+			"text": "我的",
+			"iconPath": "img/icon3.png",
+			"selectedIconPath": "./img/icon3_on.png",
+			"color": "#666666"
+		}]
 	}
 }

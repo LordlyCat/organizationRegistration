@@ -1,22 +1,18 @@
 <template name="tab">
     <view class="nav">
         <view class="findWrapper">
-            <navigator class="find" url="../find/find" open-type="reLaunch">
+            <navigator class="find" url="../find/find" open-type="redirect">
                 <image class="findIcon" src="{{src_1}}" mode="scaleToFill"></image>发现</navigator>
         </view>
         <view class="findWrapper">
-            <navigator class="find" url="../index/index" open-type="reLaunch">
+            <navigator class="find" url="../index/index" open-type="redirect">
                 <image class="findIcon" src="{{src_2}}" mode="scaleToFill"></image>报名</navigator>
         </view>
         <view class="findWrapper">
-            <navigator class="find" url="../me/me" open-type="reLaunch">
+            <navigator class="find" url="../me/me" open-type="redirect">
                 <image class="findIcon" src="{{src_3}}" mode="scaleToFill"></image>我的</navigator>
         </view>
     </view>
-</template>
-
-<template name="tabBar">
-    
 </template>
 
 <template name="redSpot">

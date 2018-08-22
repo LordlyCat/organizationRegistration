@@ -11,7 +11,44 @@ Page({
 
                 if (wx.getStorageSync('nickName')) {
                     setTimeout(() => {
-                        wx.navigateTo({
+                        // wx.request({
+                        //     // 必需
+                        //     url: 'https://bmtest.redrock.team/user/findbyopenid',
+                        //     data: {
+                        //         openid: wx.getStorageSync('openid')
+                        //     },
+                        //     header: {
+                        //         'Content-Type': 'application/x-www-form-urlencoded'
+                        //     },
+                        //     method: 'POST',
+                        //     success: (res) => {
+                        //         console.log('user', res)
+                        //         console.log(res.header.authorization)
+                        //         wx.setStorage({
+                        //             key: 'authorization',
+                        //             data: res.header.authorization
+                        //         })
+                        //         wx.setStorage({
+                        //             key: 'stuid',
+                        //             data: res.data.stuid
+                        //         })
+                        //         wx.setStorage({
+                        //             key: 'stuname',
+                        //             data: res.data.stuname
+                        //         })
+                        //         wx.setStorage({
+                        //             key: 'phonenum',
+                        //             data: res.data.phonenum
+                        //         })
+                        //     },
+                        //     fail: (res) => {
+                        //         console.log(res)
+                        //     },
+                        //     complete: (res) => {
+
+                        //     }
+                        // })
+                        wx.switchTab({
                             url: '../index/index'
                         })
                     }, 1500)
@@ -36,7 +73,7 @@ Page({
             key: "avatarUrl",
             data: JSON.parse(e.detail.rawData).avatarUrl
         })
-        wx.navigateTo({
+        wx.switchTab({
             url: '../index/index'
         })
     }

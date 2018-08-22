@@ -1,5 +1,8 @@
 /**index.wxss**/
 
+
+/**index.wxss**/
+
 .container {
     position: relative;
 }
@@ -91,6 +94,8 @@
 }
 
 
+
+
 /*page {
     overflow: hidden;
 }*/
@@ -157,7 +162,7 @@
     opacity: 0.55;
 }
 
-.bundle button{
+.bundle button {
     width: 492rpx;
     height: 85rpx;
     background: #9062F7;
@@ -172,6 +177,80 @@
     border: none;
 }
 
+.selectStatement {
+    position: relative;
+    overflow: hidden;
+    width: 619rpx;
+    height: 750rpx;
+    background: white;
+    margin: 184rpx auto;
+    border-radius: 1%;
+    border: solid 1px gray;
+}
+
+.state {
+    position: relative;
+    width: 490rpx;
+    height: 60rpx;
+    border-bottom: solid 1px gray;
+    margin: 66rpx auto;
+}
+
+.stateWrapper{
+    overflow: hidden;
+    min-height: 461rpx;
+}
+
+.scroll{
+    margin-top: 20rpx;
+    height: 610rpx;
+}
+
+.selectStatement text {
+    display: inline-block;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    line-height: 66rpx;
+}
+
+.selectStatement .tab {
+    position: absolute;
+    width: 25rpx;
+    height: 14rpx;
+    float: right;
+    top: 24rpx;
+    right: 15rpx;
+}
+
+.btn {
+    /*width: 492rpx;*/
+    height: 85rpx;
+    /*background: #9062F7;
+    box-shadow: 0 15px 35px 0 #DFDBF7;*/
+    font-family: PingFangSC-Regular;
+    margin-bottom: 50rpx;
+}
+
+.btn button{
+    display: inline-block;
+    width: 38%;
+    background: #9062F7;
+    box-shadow: 0 15px 35px 0 #DFDBF7;
+    border-radius: 10%;
+    color: #FFFFFF;
+    font-size: 32rpx;
+    text-shadow: 0 2rpx 0 #6E36ED;
+}
+
+.cancel{
+    margin-left: 64rpx;
+}
+
+.check{
+    margin-left: 20rpx;
+}
+
 .join {
     position: relative;
     overflow: hidden;
@@ -182,7 +261,8 @@
     border-radius: 1%;
 }
 
-.join text {
+.join text,
+.selectStatement text {
     display: block;
     font-family: PingFangSC-Regular;
     font-size: 28rpx;
@@ -191,21 +271,22 @@
     margin-top: 46rpx;
 }
 
-.quitSelect{
+.quitSelect,
+.add {
     position: absolute;
-    width: 60rpx;
-    height: 60rpx;
-    top: 34rpx;
+    width: 70rpx;
+    height: 70rpx;
+    top: 42rpx;
     left: 509rpx;
 }
 
-.statement{
+.statement {
     text-align: center;
     font-size: 40rpx;
     line-height: 80rpx;
 }
 
-.join button{
+.join button {
     display: block;
     margin-top: 120rpx;
     font-size: 28rpx;
@@ -213,12 +294,12 @@
     border: none;
 }
 
-.chooseWrapper{
+.chooseWrapper {
     /*display: block;*/
     margin-top: 100rpx;
 }
 
-.showSelected{
+.showSelected {
     /*display: block;*/
 }
 
@@ -226,6 +307,11 @@
 
 
 
+
+
+
+
+/*End*/
 
 
 /*End*/

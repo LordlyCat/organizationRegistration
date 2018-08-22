@@ -1,13 +1,13 @@
 <import src="../../template/template.wxml" />
 <template is="tab" data="{{...src}}" />
 <view class="wrapper">
-    <swiper indicator-dots="true" autoplay="true" circular="true" indicator-active-color="#9984F2" indicator-color="#e1e1fb">
+    <swiper indicator-dots="true" circular="true" indicator-active-color="#9984F2" indicator-color="#e1e1fb">
         <swiper-item wx:for="{{orgnazition}}">
-            <view class="box">
+            <scroll-view scroll-y class="box">
                 <image class="" src="../../img/redrockImg.png" mode="scaleToFill"></image>
                 <text class="orgnazitionName">{{item.name}}</text>
                 <text class="dec">{{item.dec}}</text>
-            </view>
+            </scroll-view>
         </swiper-item>
     </swiper>
 </view>

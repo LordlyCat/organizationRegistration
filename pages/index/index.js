@@ -2,16 +2,19 @@
 //获取应用实例
 const app = getApp()
 
+
+
 Page({
     data: {
         overflow: 'hidden',
         cover: 'coverOff',
         switch: true,
-        src: {
-            src_1: "../../img/icon1.png",
-            src_2: "../../img/icon2_on.png",
-            src_3: "../../img/icon3.png"
-        },
+        add: true,
+        // src: {
+        //     src_1: "../../img/icon1.png",
+        //     src_2: "../../img/icon2_on.png",
+        //     src_3: "../../img/icon3.png"
+        // },
         orgnazition: [{
             name: "红岩网校工作站",
             logo: "../../img/redRockLogo.png",
@@ -35,23 +38,19 @@ Page({
             statement: ['校团委办公室'],
             dec: "校团委办公室是共青团重庆邮电大学委员会直属机构之一。"
         }],
+        wanted: 1,
         index: 0,
         information: {
             stuname: '',
             stuid: '',
             phonenum: ''
         },
-        // redRockStatement: {
-        //     all: [0, 1, 2, 3, 4],
-        //     selected: [],
-        //     selectedNow: [0],
-        //     init: true
-        // },
-        selected: {
+        selectedNow: {
             index: 0,
             oname: '',
             dname: ''
-        }
+        },
+        selected: []
     },
     onLoad: function(e) {
         //console.log(wx.getStorageSync('openid'));
@@ -66,29 +65,6 @@ Page({
                 cover: 'coverOff'
             })
         }
-        // wx.request({
-        //     // 必需
-        //     url: 'http://eycjvk.natappfree.cc/user/adduser',
-        //     data: {
-        //         openid: wx.getStorageSync('openid'),
-        //         stuname: "123",
-        //         stuid: 893468,
-        //         phonenum: 290358
-        //     },
-        //     method: 'POST',
-        //     header: {
-        //         'Content-Type': 'application/x-www-form-urlencoded'
-        //     },
-        //     success: (res) => {
-        //         console.log("seccess", res.header.authorization);
-        //     },
-        //     fail: (res) => {
-        //         console.log("fail", res);
-        //     },
-        //     complete: (res) => {
-        //         //console.log("finished", res);
-        //     }
-        // })
     },
     register: function(e) {
         console.log(e);
@@ -98,10 +74,29 @@ Page({
             cover: 'coverOn',
             overflow: 'hidden',
             switch: false,
-            selected: {
+            add: true,
+            selectedNow: {
                 oname: data.orgnazition[e.currentTarget.dataset.index].name,
                 dname: data.orgnazition[e.currentTarget.dataset.index].statement[0]
             }
+        })
+    },
+    addWanted: function(e) {
+        let wanted = ++this.data.wanted
+        this.setData({
+            wanted: wanted
+        })
+    },
+    cancel: function(e) {
+        this.setData({
+            selected: [],
+            cover: 'coverOff',
+            wanted: 1
+        })
+    },
+    selectStatement: function(e) {
+        this.setData({
+            add: false
         })
     },
     submitInformation: function() {
@@ -171,6 +166,14 @@ Page({
                     wx.setStorage({
                         key: "stuid",
                         data: obj.stuid
+                    });
+                    wx.setStorage({
+                        key: "phonenum",
+                        data: obj.phonenum
+                    });
+                    wx.setStorage({
+                        key: "stuname",
+                        data: obj.stuname
                     })
                 },
                 fail: (res) => {
@@ -188,7 +191,6 @@ Page({
         }
     },
     getInput: function(e) {
-
         switch (e.target.id) {
             case "stuname":
                 this.setData({
@@ -222,18 +224,18 @@ Page({
     },
     quitSelect: function(e) {
         this.setData({
-            cover: 'coverOff',
+            // cover: 'coverOff',
             overflow: 'visible',
-            switch: false
+            switch: false,
+            add: true
         })
     },
     chooseStatement: function(e) {
-        console.log(e.detail.value);
+        //console.log(e.detail.value);
 
         let data = this.data;
-
         this.setData({
-            selected: {
+            selectedNow: {
                 //index: 0,
                 //openid: wx.getStorageSync('openid'),
                 oname: data.orgnazition[data.index].name,
@@ -243,75 +245,92 @@ Page({
 
     },
     checkSelected: function(e) {
-        console.log({ ...this.data.selected,
-            openid: wx.getStorageSync('openid')
-        });
+        let that = this;
+        let selected = this.data.selected;
+        selected.push(this.data.selectedNow);
+
+        this.setData({
+            selected: selected,
+            add: true
+        }, function(e) {
+            //console.log(that.data.selected);
+            // wx.showToast({
+            //     title: '添加成功',
+            //     icon: 'success',
+            //     duration: 1000,
+            //     mask: false
+            // })
+        })
+    },
+    send: function(e) {
+        let that = this;
         wx.showLoading({
             title: '加载中',
             mask: true
         })
-        wx.request({
-            // 必需
-            url: 'https://bmtest.redrock.team/msg/choose',
-            data: {
-                ...this.data.selected,
-                openid: wx.getStorageSync('openid')
-            },
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                authorization: wx.getStorageSync('authorization')
-            },
-            success: (res) => {
-                console.log(res);
-                if (res.data == 200) {
-                    wx.hideLoading();
-                    wx.showToast({
-                        title: '报名成功',
-                        icon: 'success',
-                        duration: 2000,
-                        mask: true
-                    })
-                } else {
-                    wx.hideLoading();
-                    wx.showToast({
-                        title: '报名失败',
-                        icon: 'success',
-                        duration: 2000,
-                        mask: true
-                    })
-                }
-            },
-            fail: (res) => {
-                console.log(res);
-            },
-            complete: (res) => {
+        console.log(this.data.selected)
+        let selected = this.data.selected;
+        this.setData({
+            wanted: 1,
+            selected: []
+        });
+        let promises = selected.map(function(e) {
+            return new Promise(function(resolve, reject) {
+                wx.request({
+                    // 必需
+                    url: 'https://bmtest.redrock.team/msg/choose',
+                    data: {
+                        ...e,
+                        openid: wx.getStorageSync('openid')
+                    },
+                    method: 'POST',
+                    header: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        authorization: wx.getStorageSync('authorization')
+                    },
+                    success: (res) => {
 
-            }
+                        console.log(res);
+
+                        if (res.data == 200) {
+                            resolve();
+                        } else {
+                            reject();
+                        }
+                    },
+                    fail: (res) => {
+                        console.log(res);
+                    },
+                    complete: (res) => {
+
+                    }
+                })
+            })
         })
-        // let oldSelected = this.data.redRockStatement.selected;
-        // let newSelected = newSelected = new Set(oldSelected);
-        // let selectedNow = this.data.redRockStatement.selectedNow;
+        Promise.all(promises).then(function(e) {
+            console.log(1111111)
+            wx.hideLoading();
+            wx.showToast({
+                title: '报名成功',
+                icon: 'success',
+                duration: 2000,
+                mask: true
+            });
+            that.setData({
+                cover: "coverOff"
+            })
+        }).catch(function(err) {
 
-        // newSelected.add(this.data.redRockStatement.selectedNow[0]);
-
-        // this.setData({
-        //     redRockStatement: {
-        //         ...this.data.redRockStatement,
-        //         selected: newSelected
-        //     }
-        // }, function(e) {
-        //     wx.showToast({
-        //         title: '报名成功',
-        //         icon: 'success',
-        //         duration: 2000,
-        //         mask: true
-        //     })
-        // })
-
-    },
-    ch: function(e) {
-        console.log(this.data.redRockStatement.selected)
+            console.log(err);
+            console.log('0000000');
+            wx.hideLoading();
+            wx.showToast({
+                title: '报名失败',
+                icon: 'success',
+                duration: 2000,
+                mask: true
+            })
+        })
     },
     getUserInfo: function(e) {}
 })

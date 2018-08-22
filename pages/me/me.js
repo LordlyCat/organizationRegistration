@@ -3,6 +3,7 @@ const app = getApp()
 //console.log(app.globalData.userInfo)
 Page({
     data: {
+        cover: false,
         src: {
             src_1: "../../img/icon1.png",
             src_2: "../../img/icon2.png",
@@ -10,49 +11,25 @@ Page({
         },
         nickame: '',
         avatarUrl: '',
+        stuname: '',
         stuid: '',
         phonenum: '',
         moreClassName1: 'more',
         more1: '../../img/more.png',
         moreClassName2: 'pick',
         more2: '../../img/pick.png',
-        orgnazition: [{
-            name: '红岩网校工作站',
-            show: false,
-            statement: [{
-                index: 0,
-                name: 'a',
-                show: false,
-                news: ['n1', 'n2']
-            }, {
-                index: 0,
-                name: 'b',
-                show: false,
-                news: ['n1', 'n2']
-            }]
-        }, {
-            name: '科联',
-            show: false,
-            statement: [{
-                index: 1,
-                name: 'q',
-                show: false,
-                news: ['n1', 'n2']
-            }, {
-                index: 1,
-                name: 'w',
-                show: false,
-                news: ['n1', 'n2']
-            }]
-        }],
-        showList: [
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ]
+        orgnazition: [],
+        newPersonal: {
+            stuname: '',
+            stuid: '',
+            phonenum: ''
+        }
     },
     dealData: function(arr) { //数据处理
         let data = [];
-
+        if (arr.length === 0) {
+            return data;
+        }
         arr.forEach((item) => {
             let oname = item.oname;
             let l = data.length;
@@ -101,7 +78,7 @@ Page({
                 }
             }
         })
-        console.log(data);
+        //console.log(data);
         return data;
     },
     onLoad: function(e) {
@@ -135,7 +112,7 @@ Page({
     onReady: function(e) {
 
         let nickName = wx.getStorageSync('nickName')
-        console.log(wx.getStorageSync('nickName'))
+        //console.log(wx.getStorageSync('nickName'))
         this.setData({
             nickName: wx.getStorageSync('nickName'),
             avatarUrl: wx.getStorageSync('avatarUrl'),
@@ -176,5 +153,114 @@ Page({
         this.setData({
             orgnazition: arr
         });
+    },
+    modifyPersonal: function(e) {
+        this.setData({
+            cover: true,
+            stuid: wx.getStorageSync('stuid'),
+            phonenum: wx.getStorageSync('phonenum'),
+            username: wx.getStorageSync('stuname')
+        })
+    },
+    quitModify: function(e) {
+        this.setData({
+            cover: false
+        })
+    },
+    getInput: function(e) {
+        switch (e.target.id) {
+            case "stuname":
+                this.setData({
+                    newPersonal: {
+                        ...this.data.newPersonal,
+                        stuname: e.detail.value
+                    }
+                })
+                break;
+            case "stuid":
+                this.setData({
+                    newPersonal: {
+                        ...this.data.newPersonal,
+                        stuid: e.detail.value
+                    }
+                })
+                break;
+            case "phonenum":
+                this.setData({
+                    newPersonal: {
+                        ...this.data.newPersonal,
+                        phonenum: e.detail.value
+                    }
+                })
+                break;
+            default:
+                console.log(false);
+                break;
+        }
+        console.log(this.data.newPersonal)
+    },
+    checkModifyPersonal: function(e) {
+        //console.log(this.data.newPersonal);
+        let newPersonal = this.data.newPersonal
+        let flag = false;
+        let regu = "^[ ]+$";
+        let re = new RegExp(regu);
+        Object.keys(newPersonal).forEach(function(key) {
+            if (key !== 'phonenum') {
+                if (newPersonal[key].length === 0 || re.test(newPersonal[key])) {
+                    flag = true;
+                    return;
+                }
+            }
+        })
+
+        if (flag) {
+            wx.showModal({
+                title: '绑定失败',
+                content: '必填项内容不能为空',
+                showCancel: false
+            })
+            return;
+        }
+        wx.request({
+            // 必需
+            url: 'https://bmtest.redrock.team/user/updateuser',
+            data: {
+                ...newPersonal,
+                openid: wx.getStorageSync('openid')
+            },
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                authorization: wx.getStorageSync('authorization')
+            },
+            method: 'POST',
+            success: (res) => {
+                console.log(res);
+                if (res.data == 'success') {
+                    wx.showToast({
+                        title: '修改成功',
+                        icon: 'success',
+                        duration: 1200,
+                        mask: true
+                    })
+                } else {
+                    wx.showModal({
+                        title: '修改失败',
+                        content: '请重试',
+                        showCancel: false
+                    })
+                }
+            },
+            fail: (res) => {
+                wx.showModal({
+                    title: '修改失败',
+                    content: '请重试',
+                    showCancel: false
+                })
+            },
+            complete: (res) => {
+
+            }
+        })
     }
 })

@@ -10,7 +10,7 @@ page {
 
 
 swiper {
-    height: 1006rpx;
+    height: 1066rpx;
 }
 
 swiper-item {
@@ -18,9 +18,9 @@ swiper-item {
 }
 
 .box {
-    overflow: hidden;
+    display: block;
     width: 677rpx;
-    height: 806rpx;
+    height: 886rpx;
     background: #FFFFFF;
     margin: 89rpx auto;
 }
@@ -53,7 +53,7 @@ swiper-item {
     letter-spacing: rpx;
     text-align: justify;
     line-height: 42rpx;
-    padding: 10rpx 40rpx 0rpx 40rpx;
+    padding: 10rpx 40rpx 20rpx 40rpx;
 }
 
 

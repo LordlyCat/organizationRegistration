@@ -57,7 +57,7 @@ App({
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: (res) => {
-                //console.log('authorization', res);
+                console.log('authorization', res);
                 if (res.header.authorization) {
                     this.globalData.checkFlag = true;
                 }
@@ -73,6 +73,12 @@ App({
                     key: "phonenum",
                     data: res.data.phonenum
                 })
+
+                wx.setStorage({
+                    key: 'stuname',
+                    data: res.data.stuname
+                })
+
             },
             fail: (res) => {
 
@@ -85,31 +91,40 @@ App({
     globalData: {
         anthorize: true,
         checkFlag: false,
-        userInfo: null,
-        "tabBar": {
-            "list": [{
-                "pagePath": "pages/find/find",
-                "text": "发现",
-                "iconPath": "img/icon1.png",
-                "selectedIconPath": "img/icon1_on.png",
-                "selected": false
-            }, {
-                "pagePath": "pages/index/index",
-                "text": "报名",
-                "iconPath": "img/icon2.png",
-                "selectedIconPath": "img/icon2_on.png",
-                "selected": true
-            }, {
-                "pagePath": "pages/me/me",
-                "text": "我的",
-                "iconPath": "img/icon3.png",
-                "selectedIconPath": "img/icon3_on.png",
-                "selected": false
-            }]
-
-        }
+        userInfo: null
     },
     onShow: function(e) {
 
     }
 })
+
+
+// "tabBar": {
+//         "color": "#666666",
+//         "backgroundColor": "#ffffff",
+//         "list": [{
+//             "pagePath": "pages/find/find",
+//             "text": "发现",
+//             "iconPath": "img/icon1.png",
+//             "selectedIconPath": "img/icon1_on.png",
+//             "selected": false
+//         }, {
+//             "pagePath": "pages/index/index",
+//             "text": "报名",
+//             "iconPath": "img/icon2.png",
+//             "selectedIconPath": "img/icon2_on.png",
+//             "selected": true
+//         }, {
+//             "pagePath": "pages/me/me",
+//             "text": "我的",
+//             "iconPath": "img/icon3.png",
+//             "selectedIconPath": "img/icon3_on.png",
+//             "selected": false
+//         }, {
+//             "pagePath": "pages/loading/loading",
+//             "text": "发现",
+//             "iconPath": "img/icon1.png",
+//             "selectedIconPath": "img/more.png",
+//             "selected": false
+//         }]
+//     }
