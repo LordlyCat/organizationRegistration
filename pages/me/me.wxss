@@ -12,6 +12,14 @@ page {
     margin: 31rpx auto;
 }
 
+
+
+
+
+
+
+
+
 /*.headWrapper{
     overflow: hidden;
     display: inline-block;
@@ -25,6 +33,7 @@ page {
     background: pink;
 }
 */
+
 .me .head {
     display: block;
     float: left;
@@ -181,7 +190,7 @@ page {
     margin-bottom: 0;
 }
 
-.cover{
+.cover {
     position: absolute;
     width: 750rpx;
     height: 100%;
@@ -189,7 +198,7 @@ page {
     background: rgba(0, 0, 0, 0.80);
 }
 
-.modifyInformation{
+.modifyInformation {
     position: relative;
     overflow: hidden;
     width: 619rpx;
@@ -266,7 +275,7 @@ page {
     border: none;
 }
 
-.quitModify{
+.quitModify {
     position: absolute;
     top: 24rpx;
     right: 30rpx;
@@ -274,10 +283,147 @@ page {
     height: 36rpx;
 }
 
+.modifyWrapper {
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 677rpx;
+    margin: 30rpx auto;
+    padding: 40rpx 30rpx;
+    background: white;
+}
+
+.title {
+    height: 42rpx;
+    font-size: 30rpx;
+    font-family: PingFangSC-Light;
+    color: rgba(51, 51, 51, 1);
+    line-height: 42rpx;
+    text-align: center;
+    display: block;
+}
+
+.modifyBox {
+    border-bottom: solid 1px lightgray;
+    padding: 30rpx;
+}
+
+.modifyWrapper image {
+    width: 32rpx;
+    height: 32rpx;
+    float: right;
+    margin-top: 8rpx;
+}
+
+.modifyOrz {
+    height: 45rpx;
+    font-size: 32rpx;
+    font-family: PingFangSC-Light;
+    color: rgba(17, 17, 17, 1);
+    line-height: 45rpx;
+}
+
+.modifyWrapper .modifyTab {
+    margin-right: 42rpx;
+}
+
+.modifyStatement {
+    overflow: hidden;
+    margin-top: 25rpx;
+    height: 40rpx;
+    font-size: 28rpx;
+    font-family: PingFangSC-Light;
+    color: rgba(68, 68, 68, 1);
+    line-height: 40rpx;
+}
+
+.checkDelete {
+    width: 619rpx;
+    height: 298rpx;
+    margin: 400rpx auto;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 4rpx;
+    font-size: 34rpx;
+    font-family: PingFangSC-Light;
+    color: rgba(51, 51, 51, 1);
+    line-height: 138rpx;
+    text-align: center;
+}
+
+.checkDelete button {
+    float: left;
+    margin-top: 20rpx;
+    margin-left: 60rpx;
+    width: 176rpx;
+    height: 85rpx;
+    background: rgba(144, 98, 247, 1);
+    box-shadow: 0px 15rpx 35rpx 0rpx rgba(223, 219, 247, 1);
+    border-radius: 40rpx;
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular;
+    color: rgba(255, 255, 255, 1);
+    line-height: 85rpx;
+}
+
+.sure {
+    margin-left: 147rpx !important;
+}
 
 
+.modifyChoose {
+    position: relative;
+    overflow: hidden;
+    width: 619rpx;
+    height: 610rpx;
+    background: white;
+    margin: 184rpx auto;
+    border-radius: 1%;
+}
 
+.modifyChoose text,
+.selectStatement text {
+    display: block;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #888888;
+    text-align: center;
+    margin-top: 46rpx;
+}
 
+.quitSelect {
+    position: absolute;
+    width: 40rpx;
+    height: 40rpx;
+    top: 22rpx;
+    left: 559rpx;
+}
+
+.modifyChoose .statement {
+    text-align: center;
+    font-size: 40rpx;
+    line-height: 80rpx;
+    border: none;
+}
+
+.modifyChoose button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 50rpx;
+    width: 492rpx;
+    height: 85rpx;
+    background: rgba(144, 98, 247, 1);
+    box-shadow: 0px 15px 35px 0px rgba(223, 219, 247, 1);
+    border-radius: 40rpx;
+    border: none;
+    font-size:32rpx;
+font-family:PingFangSC-Regular;
+color:rgba(255,255,255,1);
+line-height:85rpx;
+}
+
+.chooseWrapper {
+    /*display: block;*/
+    margin-top: 30rpx;
+}
 
 
 

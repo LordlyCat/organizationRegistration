@@ -4,6 +4,10 @@ const app = getApp()
 Page({
     data: {
         cover: false,
+        modifyCover: false,
+        modify: false,
+        delete: false,
+        change: false,
         src: {
             src_1: "../../img/icon1.png",
             src_2: "../../img/icon2.png",
@@ -23,7 +27,9 @@ Page({
             stuname: '',
             stuid: '',
             phonenum: ''
-        }
+        },
+        deleteName: {},
+        modifyName: {}
     },
     dealData: function(arr) { //数据处理
         let data = [];
@@ -82,6 +88,23 @@ Page({
         return data;
     },
     onLoad: function(e) {
+        this.getOrz();
+    },
+    onReady: function(e) {
+
+        let nickName = wx.getStorageSync('nickName')
+        //console.log(wx.getStorageSync('nickName'))
+        this.setData({
+            nickName: wx.getStorageSync('nickName'),
+            avatarUrl: wx.getStorageSync('avatarUrl'),
+            stuid: wx.getStorageSync('stuid'),
+            phonenum: wx.getStorageSync('phonenum'),
+        })
+    },
+    onShow: function(e) {
+        console.log('me')
+    },
+    getOrz: function(e) {
         let that = this;
         wx.request({
             // 必需
@@ -107,17 +130,6 @@ Page({
             complete: (res) => {
 
             }
-        })
-    },
-    onReady: function(e) {
-
-        let nickName = wx.getStorageSync('nickName')
-        //console.log(wx.getStorageSync('nickName'))
-        this.setData({
-            nickName: wx.getStorageSync('nickName'),
-            avatarUrl: wx.getStorageSync('avatarUrl'),
-            stuid: wx.getStorageSync('stuid'),
-            phonenum: wx.getStorageSync('phonenum'),
         })
     },
     showStatement: function(e) {
@@ -154,12 +166,22 @@ Page({
             orgnazition: arr
         });
     },
+    gotoModify: function(e) {
+        this.setData({
+            modify: true
+        })
+    },
     modifyPersonal: function(e) {
         this.setData({
             cover: true,
             stuid: wx.getStorageSync('stuid'),
             phonenum: wx.getStorageSync('phonenum'),
-            username: wx.getStorageSync('stuname')
+            stuname: wx.getStorageSync('stuname'),
+            newPersonal: {
+                stuname: '',
+                stuid: '',
+                phonenum: ''
+            }
         })
     },
     quitModify: function(e) {
@@ -200,7 +222,7 @@ Page({
         console.log(this.data.newPersonal)
     },
     checkModifyPersonal: function(e) {
-        //console.log(this.data.newPersonal);
+        let that = this;
         let newPersonal = this.data.newPersonal
         let flag = false;
         let regu = "^[ ]+$";
@@ -223,7 +245,7 @@ Page({
             return;
         }
         wx.request({
-            // 必需
+
             url: 'https://bmtest.redrock.team/user/updateuser',
             data: {
                 ...newPersonal,
@@ -243,6 +265,24 @@ Page({
                         duration: 1200,
                         mask: true
                     })
+                    that.setData({
+                        stuname: newPersonal.stuname,
+                        stuid: newPersonal.stuid,
+                        phonenum: newPersonal.phonenum
+                    })
+                    wx.setStorage({
+                        key: "stuid",
+                        data: newPersonal.stuid
+                    })
+                    wx.setStorage({
+                        key: "phonenum",
+                        data: newPersonal.phonenum
+                    })
+
+                    wx.setStorage({
+                        key: 'stuname',
+                        data: newPersonal.stuname
+                    })
                 } else {
                     wx.showModal({
                         title: '修改失败',
@@ -259,8 +299,83 @@ Page({
                 })
             },
             complete: (res) => {
+                that.setData({
+                    cover: false
+                })
+            }
+        })
+    },
+    deleteStatement: function(e) {
+        let oname = this.data.orgnazition[e.target.dataset.orindex].oname;
+        let dname = this.data.orgnazition[e.target.dataset.orindex].statement[e.target.dataset.index].dname
+        this.setData({
+            modifyCover: true,
+            delete: true,
+            deleteName: {
+                openid: wx.getStorageSync('openid'),
+                oname: oname,
+                dname: dname
+            }
+        })
+
+    },
+    checkDelete: function(e) {
+        let deleteName = this.data.deleteName;
+        wx.request({
+            // 必需
+            url: 'https://bmtest.redrock.team/msg/dechoose',
+            data: {
+                ...deleteName,
+                openid: wx.getStorageSync('openid')
+            },
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                authorization: wx.getStorageSync('authorization')
+            },
+            method: 'POST',
+            success: (res) => {
+                console.log(res)
+            },
+            fail: (res) => {
+                console.log(res)
+            },
+            complete: (res) => {
 
             }
+        })
+        this.getOrz();
+        this.setData({
+            modifyCover: false,
+            delete: false,
+            deleteName: {}
+        })
+    },
+    quitDelete: function(e) {
+        this.setData({
+            modifyCover: false,
+            delete: false,
+            deleteName: {}
+        })
+    },
+    modifyStatement: function(e) {
+        let oldOname = this.data.orgnazition[e.target.dataset.orindex].oname;
+        let oldDname = this.data.orgnazition[e.target.dataset.orindex].statement[e.target.dataset.index];
+
+        this.setData({
+            modifyCover: true,
+            delete: false,
+            modifyName: {
+                index: e.target.dataset.orindex,
+                oldoname: oldOname,
+                olddname: oldDname
+            }
+        })
+    },
+    quitModify: function(e) {
+        this.setData({
+            modifyCover: false,
+            delete: false,
+            modifyName: {}
         })
     }
 })
