@@ -1,8 +1,6 @@
-<import src="../../template/template.wxml" />
-<template is="tab" data="{{...src}}" />
 <view class="wrapper">
     <swiper indicator-dots="true" circular="true" indicator-active-color="#9984F2" indicator-color="#e1e1fb">
-        <swiper-item wx:for="{{orgnazition}}">
+        <swiper-item wx:for="{{orgnazition}}" wx:key="*this">
             <scroll-view scroll-y class="box">
                 <image class="" src="../../img/redrockImg.png" mode="scaleToFill"></image>
                 <text class="orgnazitionName">{{item.name}}</text>

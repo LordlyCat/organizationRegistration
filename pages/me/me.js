@@ -29,7 +29,21 @@ Page({
             phonenum: ''
         },
         deleteName: {},
-        modifyName: {}
+        modifyName: {},
+        orz: [{
+            name: "红岩网校工作站",
+            statement: ['产品策划运营部', '视觉设计部', 'Web研发部', '移动开发部', '运维安全部']
+        }, {
+            name: "校团委宣传部",
+            statement: ['校团委宣传部']
+        }, {
+            name: "校团委组织部",
+            statement: ['校团委组织部']
+        }, {
+            name: "校团委办公室",
+            statement: ['校团委办公室']
+        }],
+        thisOrz: {}
     },
     dealData: function(arr) { //数据处理
         let data = [];
@@ -93,7 +107,6 @@ Page({
     onReady: function(e) {
 
         let nickName = wx.getStorageSync('nickName')
-        //console.log(wx.getStorageSync('nickName'))
         this.setData({
             nickName: wx.getStorageSync('nickName'),
             avatarUrl: wx.getStorageSync('avatarUrl'),
@@ -102,7 +115,7 @@ Page({
         })
     },
     onShow: function(e) {
-        console.log('me')
+        this.getOrz();
     },
     getOrz: function(e) {
         let that = this;
@@ -171,6 +184,12 @@ Page({
             modify: true
         })
     },
+    quitChange: function(e) {
+        console.log(e)
+        this.setData({
+            modify: false
+        })
+    },
     modifyPersonal: function(e) {
         this.setData({
             cover: true,
@@ -184,7 +203,7 @@ Page({
             }
         })
     },
-    quitModify: function(e) {
+    quitModifyP: function(e) {
         this.setData({
             cover: false
         })
@@ -238,7 +257,7 @@ Page({
 
         if (flag) {
             wx.showModal({
-                title: '绑定失败',
+                title: '修改失败',
                 content: '必填项内容不能为空',
                 showCancel: false
             })
@@ -335,6 +354,7 @@ Page({
             method: 'POST',
             success: (res) => {
                 console.log(res)
+                this.getOrz();
             },
             fail: (res) => {
                 console.log(res)
@@ -343,7 +363,6 @@ Page({
 
             }
         })
-        this.getOrz();
         this.setData({
             modifyCover: false,
             delete: false,
@@ -359,23 +378,105 @@ Page({
     },
     modifyStatement: function(e) {
         let oldOname = this.data.orgnazition[e.target.dataset.orindex].oname;
-        let oldDname = this.data.orgnazition[e.target.dataset.orindex].statement[e.target.dataset.index];
+        let oldDname = this.data.orgnazition[e.target.dataset.orindex].statement[e.target.dataset.index].dname;
 
         this.setData({
             modifyCover: true,
-            delete: false,
-            modifyName: {
-                index: e.target.dataset.orindex,
-                oldoname: oldOname,
-                olddname: oldDname
+            delete: false
+        })
+
+        let thisOrz = {};
+        this.data.orz.forEach(function(e) {
+            if (e.name === oldOname) {
+                thisOrz = e;
+                return;
             }
         })
+        this.setData({
+            thisOrz: thisOrz,
+            modifyName: {
+                length: thisOrz.statement.length,
+                oldoname: oldOname,
+                olddname: oldDname,
+                newoname: oldOname,
+                newdname: thisOrz.statement[0]
+            }
+        })
+        console.log(this.data.modifyName)
     },
     quitModify: function(e) {
         this.setData({
+            thisOrz: {},
             modifyCover: false,
             delete: false,
             modifyName: {}
+        })
+    },
+    getPicker: function(e) {
+        this.setData({
+            modifyName: {
+                ...this.data.modifyName,
+                //index: e.detail.value[0],
+                newdname: this.data.thisOrz.statement[e.detail.value[0]]
+            }
+        })
+        console.log(this.data.modifyName)
+    },
+    checkChange: function(e) {
+        let modifyName = this.data.modifyName;
+        if (modifyName.olddname === modifyName.newdname) {
+            wx.showModal({
+                title: '修改后部门与原部门相同',
+                content: '请重试',
+                showCancel: false
+            })
+            return
+        }
+        wx.request({
+            // 必需
+            url: 'https://bmtest.redrock.team/msg/rechoose',
+            data: {
+                ...modifyName,
+                openid: wx.getStorageSync('openid')
+            },
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                authorization: wx.getStorageSync('authorization')
+            },
+            method: 'POST',
+            success: (res) => {
+                if (res.data == 200) {
+                    wx.showToast({
+                        title: '修改成功',
+                        icon: 'success',
+                        duration: 1200,
+                        mask: true
+                    })
+                    this.getOrz();
+                    this.setData({
+                        thisOrz: {},
+                        modifyCover: false,
+                        delete: false,
+                        modifyName: {}
+                    })
+                } else {
+                    wx.showModal({
+                        title: '修改失败',
+                        content: '请重试',
+                        showCancel: false
+                    })
+                }
+            },
+            fail: (res) => {
+                wx.showModal({
+                    title: '修改失败',
+                    content: '请重试',
+                    showCancel: false
+                })
+            },
+            complete: (res) => {
+
+            }
         })
     }
 })

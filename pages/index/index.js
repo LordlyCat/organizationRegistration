@@ -50,7 +50,8 @@ Page({
             oname: '',
             dname: ''
         },
-        selected: []
+        selected: [],
+        selectedIndex: 1
     },
     onLoad: function(e) {
         //console.log(wx.getStorageSync('openid'));
@@ -95,8 +96,15 @@ Page({
         })
     },
     selectStatement: function(e) {
+        let data = this.data;
+        console.log(e.currentTarget.dataset.index)
         this.setData({
-            add: false
+            add: false,
+            selectedIndex: e.currentTarget.dataset.index,
+            selectedNow: {
+                oname: data.orgnazition[data.index].name,
+                dname: data.orgnazition[data.index].statement[0]
+            }
         })
     },
     submitInformation: function() {
@@ -220,7 +228,6 @@ Page({
                 console.log(false);
                 break;
         }
-        //console.log(this.data.information)
     },
     quitSelect: function(e) {
         this.setData({
@@ -231,9 +238,9 @@ Page({
         })
     },
     chooseStatement: function(e) {
-        //console.log(e.detail.value);
 
         let data = this.data;
+
         this.setData({
             selectedNow: {
                 //index: 0,
@@ -245,9 +252,12 @@ Page({
 
     },
     checkSelected: function(e) {
-        let that = this;
         let selected = this.data.selected;
-        selected.push(this.data.selectedNow);
+
+        if (selected.length <= this.data.wanted) {
+            //selected.push(this.data.selectedNow);
+            selected[this.data.selectedIndex] = this.data.selectedNow
+        }
 
         this.setData({
             selected: selected,
@@ -264,12 +274,15 @@ Page({
     },
     send: function(e) {
         let that = this;
+        console.log(this.data.selected)
+        let selected = this.data.selected;
+        if (selected.length === 0) {
+            return
+        }
         wx.showLoading({
             title: '加载中',
             mask: true
         })
-        console.log(this.data.selected)
-        let selected = this.data.selected;
         this.setData({
             wanted: 1,
             selected: []

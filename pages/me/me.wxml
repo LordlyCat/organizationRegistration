@@ -1,6 +1,6 @@
 <!-- <import src="../../template/template.wxml" />
 <template is="tab" data="{{...src}}" /> -->
-<view wx:if="{{modify}}">
+<view wx:if="{{!modify}}">
     <view class="me" bind:tap="modifyPersonal">
         <!-- <view class="headWrapper">
         <open-data class="head" type="userAvatarUrl"></open-data>
@@ -42,7 +42,7 @@
                             </view>
                         </view>
                         <block wx:if="{{item.show}}">
-                            <view class="news" wx:for="{{item.news}}">
+                            <view class="news" wx:for="{{item.news}}" wx:key="*this">
                             </view>
                         </block>
                     </block>
@@ -54,7 +54,7 @@
     <view class="cover" wx:if="{{cover}}">
         <view class="modifyInformation bundle">
             <text class="title">修改信息</text>
-            <image class="quitModify" src="../../img/cancel.png" mode="scaleToFill" bind:tap="quitModify"></image>
+            <image class="quitModify" src="../../img/cancel.png" mode="scaleToFill" bind:tap="quitModifyP"></image>
             <view class="information username">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/user.png" mode="scaleToFill"></image>
@@ -74,7 +74,8 @@
         </view>
     </view>
 </view>
-<view class="modifyWrapper" wx:if="{{!modify}}">
+<view class="modifyWrapper" wx:if="{{modify}}">
+    <image id="quitChange" src="../../img/back.png" mode="scaleToFill" bind:tap="quitChange"></image>
     <text class="title">修改已报名组织</text>
     <view class="modifyBox" wx:for="{{orgnazition}}" wx:key="*this">
         <view class="modifyOrz">
@@ -94,17 +95,16 @@
         <button bind:tap="quitDelete">取消</button>
         <button class="sure" bind:tap="checkDelete">确定</button>
     </view>
-    <view class="modifyChoose">
+    <view class="modifyChoose" wx:if="{{!delete}}">
         <text>修改报名部门</text>
-            <image class="quitSelect" bind:tap="quitModify" src="../../img/cancel.png" mode="scaleToFill"></image>
-            
-            <view class="chooseWrapper">
-                <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="chooseStatement">
-                    <picker-view-column>
-                        <view class="statement" wx:for="{{[1,2,3,4,5]}}" wx:key="*this">haha</view>
-                    </picker-view-column>
-                </picker-view>
-                <button bind:tap="checkSelected">确定</button>
-            </view>
+        <image class="quitSelect" bind:tap="quitModify" src="../../img/cancel.png" mode="scaleToFill"></image>
+        <view class="chooseWrapper">
+            <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="getPicker">
+                <picker-view-column>
+                    <view class="statement" wx:for="{{thisOrz.statement}}" wx:key="*this">{{item}}</view>
+                </picker-view-column>
+            </picker-view>
+            <button bind:tap="checkChange">确定</button>
+        </view>
     </view>
 </view>

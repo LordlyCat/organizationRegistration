@@ -40,7 +40,7 @@
             <image class="add" bind:tap="addWanted" src="../../img/add.png" mode="scaleToFill"></image>
             <scroll-view scroll-y class="scroll">
                 <view class="stateWrapper">
-                    <view class="state" wx:for="{{wanted}}" wx:key="*this" bind:tap="selectStatement">
+                    <view class="state" wx:for="{{wanted}}" wx:key="*this" bind:tap="selectStatement" data-index="{{index}}">
                         <text>{{selected[index].dname}}</text>
                         <image class="tab" src="../../img/pick.png" mode="scaleToFill"></image>
                     </view>
@@ -58,7 +58,7 @@
             <view class="chooseWrapper">
                 <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="chooseStatement">
                     <picker-view-column>
-                        <view class="statement" wx:for="{{orgnazition[index].statement}}">{{item}}</view>
+                        <view class="statement" wx:for="{{orgnazition[index].statement}}" wx:key="*this">{{item}}</view>
                     </picker-view-column>
                 </picker-view>
                 <button bind:tap="checkSelected">确定</button>

@@ -20,6 +20,7 @@ page {
 
 
 
+
 /*.headWrapper{
     overflow: hidden;
     display: inline-block;
@@ -64,6 +65,7 @@ page {
 .me .studentID,
 .me .phone {
     display: inline-block;
+    /*float: left;*/
 }
 
 .me .studentID {
@@ -77,11 +79,12 @@ page {
 
 .me .studentID text,
 .me .phone text {
+    float: left;
     font-family: PingFangSC-Regular;
     font-size: 26rpx;
     color: #666666;
     text-align: left;
-    line-height: 16rpx;
+    line-height: 56rpx;
     margin-left: 18.6rpx;
 }
 
@@ -308,6 +311,7 @@ page {
 }
 
 .modifyWrapper image {
+    position: relative;
     width: 32rpx;
     height: 32rpx;
     float: right;
@@ -414,17 +418,25 @@ page {
     box-shadow: 0px 15px 35px 0px rgba(223, 219, 247, 1);
     border-radius: 40rpx;
     border: none;
-    font-size:32rpx;
-font-family:PingFangSC-Regular;
-color:rgba(255,255,255,1);
-line-height:85rpx;
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular;
+    color: rgba(255, 255, 255, 1);
+    line-height: 85rpx;
 }
 
 .chooseWrapper {
-    /*display: block;*/
     margin-top: 30rpx;
 }
 
+#quitChange {
+    display: block;
+    width: 56rpx;
+    height: 56rpx;
+    position: absolute;
+    top: 40rpx;
+    left: 45rpx;
+    opacity: 0.7;
+}
 
 
 

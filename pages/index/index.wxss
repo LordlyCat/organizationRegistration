@@ -271,7 +271,14 @@
     margin-top: 46rpx;
 }
 
-.quitSelect,
+.quitSelect{
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    top: 22rpx;
+    left: 539rpx;
+}
+
 .add {
     position: absolute;
     width: 70rpx;
