@@ -1,3 +1,6 @@
 
-<text>红岩出品，必属精品</text>
-<button wx:if="{{!anthorize}}" open-type="getUserInfo" style="margin-top: 300rpx;" bindgetuserinfo="getUserInfo">开启报名之旅</button>
+<image class="enter" src="../../img/enter.png" mode="scaleToFill"></image>
+<image class="appName" src="../../img/ynbyy.png" mode="scaleToFill"></image>
+<image class="desc" src="../../img/words.png" mode="scaleToFill"></image>
+<button open-type="getUserInfo" style="margin-top: 300rpx;" bindgetuserinfo="getUserInfo"><image class="btnImg" src="../../img/enterBtn.png" mode="scaleToFill"></image></button>
+<text>@红岩网校工作站</text>

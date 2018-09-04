@@ -19,7 +19,9 @@
     </view>
     <view class="signed">
         <text>已报名组织</text>
-        <image class="modify" src="../../img/modify.png" mode="scaleToFill" bind:tap="gotoModify"></image>
+        <view class="modifyImg" bind:tap="gotoModify">
+            <image class="modify" src="../../img/modify.png" mode="scaleToFill"></image>
+        </view>
     </view>
     <view class="orgnazitionWrapper">
         <block wx:for="{{orgnazition}}" wx:key="*this">

@@ -48,9 +48,9 @@ Page({
 
                         //     }
                         // })
-                        wx.switchTab({
-                            url: '../index/index'
-                        })
+                        // wx.switchTab({
+                        //     url: '../index/index'
+                        // })
                     }, 1500)
                 } else {
                     app.globalData.anthorize = false;
