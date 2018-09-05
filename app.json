@@ -1,6 +1,6 @@
 {
 	"pages": [
-		"pages/loading/loading",
+
 		"pages/index/index",
 		"pages/find/find",
 		"pages/me/me"
@@ -9,7 +9,7 @@
 	"window": {
 		"backgroundTextStyle": "light",
 		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "组织报名",
+		"navigationBarTitleText": "邮你不一样",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {

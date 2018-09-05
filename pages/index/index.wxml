@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <!--index.wxml-->
-<view class="container" style="overflow: {{overflow}};">
+<view class="container" wx:if="{{anthorize}}" style="overflow: {{overflow}};">
     <scroll-view class="mainBody">
         <view class="organization" wx:for="{{orgnazition}}" wx:key="*this">
             <view class="top">
@@ -54,7 +54,6 @@
         <view class="join" wx:if="{{!add}}">
             <text>选择部门</text>
             <image class="quitSelect" bind:tap="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
-
             <view class="chooseWrapper">
                 <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="chooseStatement">
                     <picker-view-column>
@@ -65,4 +64,8 @@
             </view>
         </view>
     </view>
+</view>
+
+<view class="loading" wx:if="{{!anthorize}}">
+    <include src="../loading/loading.wxml"/>
 </view>

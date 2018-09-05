@@ -1,10 +1,4 @@
-/*text{
-    display: block;
-    text-align: center;
-    margin-top: 300rpx;
-}*/
-
-.enter{
+.loading .enter{
     display: block;
     width: 536rpx;
     height: 516rpx;
@@ -12,7 +6,7 @@
     margin-bottom: 0;
 }
 
-.appName{
+.loading .appName{
     display: block;
     width: 260rpx;
     height: 45rpx;
@@ -20,14 +14,14 @@
     margin-bottom: 0;
 }
 
-.desc {
+.loading .desc {
     display: block;
     width: 371rpx;
     height: 33rpx;
     margin: 30rpx auto;
 }
 
-button {
+.loading button {
     width: 420rpx;
     height: 106rpx;
     border: none;
@@ -36,17 +30,17 @@ button {
     margin-bottom: 20rpx !important;
 }
 
-button::after {
+.loading button::after {
   border: none;
 }
 
 
-.btnImg{
+.loading .btnImg{
     width: 100%;
     height: 100%;
 }
 
-text{
+.loading text{
     position: absolute;
     text-align: center;
     color: #9062f7;

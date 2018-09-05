@@ -2,21 +2,22 @@
 App({
 
     onLaunch: function() {
-
+        //wx.hideTabBar();
         // 登录
         if (wx.getStorageSync('openid')) {
             let that = this;
             this.checkUser(wx.getStorageSync('openid'));
 
-            if (!wx.getStorageSync('nickName')) {
-                wx.navigateTo({
-                    url: './pages/loading/loading'
-                })
+            if (wx.getStorageSync('nickName')) {
+                // wx.navigateTo({
+                //     url: './pages/loading/loading'
+                // })
                 that.globalData.anthorize = true;
-
             }
             return false;
         }
+
+        let that = this;
         wx.login({
             success: res => {
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -32,7 +33,7 @@ App({
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         success: function(res) {
-                            console.log(res);
+                            that.checkUser(res.data);
                             wx.setStorage({
                                 key: "openid",
                                 data: res.data
@@ -57,74 +58,42 @@ App({
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: (res) => {
-                console.log('authorization', res);
                 if (res.header.authorization) {
+
                     this.globalData.checkFlag = true;
+                    console.log('checkUser:', this.globalData.checkFlag)
+                    wx.setStorage({
+                        key: "authorization",
+                        data: res.header.authorization
+                    })
+                    wx.setStorage({
+                        key: "stuid",
+                        data: res.data.stuid
+                    })
+                    wx.setStorage({
+                        key: "phonenum",
+                        data: res.data.phonenum
+                    })
+
+                    wx.setStorage({
+                        key: 'stuname',
+                        data: res.data.stuname
+                    })
+                } else {
+                    wx.hideTabBar();
                 }
-                wx.setStorage({
-                    key: "authorization",
-                    data: res.header.authorization
-                })
-                wx.setStorage({
-                    key: "stuid",
-                    data: res.data.stuid
-                })
-                wx.setStorage({
-                    key: "phonenum",
-                    data: res.data.phonenum
-                })
-
-                wx.setStorage({
-                    key: 'stuname',
-                    data: res.data.stuname
-                })
 
             },
-            fail: (res) => {
-
-            },
-            complete: (res) => {
-
-            }
+            fail: (res) => {},
+            complete: (res) => {}
         })
     },
     globalData: {
-        anthorize: true,
+        anthorize: false,
         checkFlag: false,
         userInfo: null
     },
     onShow: function(e) {
-
+        //wx.hideTabBar();
     }
 })
-
-
-// "tabBar": {
-//         "color": "#666666",
-//         "backgroundColor": "#ffffff",
-//         "list": [{
-//             "pagePath": "pages/find/find",
-//             "text": "发现",
-//             "iconPath": "img/icon1.png",
-//             "selectedIconPath": "img/icon1_on.png",
-//             "selected": false
-//         }, {
-//             "pagePath": "pages/index/index",
-//             "text": "报名",
-//             "iconPath": "img/icon2.png",
-//             "selectedIconPath": "img/icon2_on.png",
-//             "selected": true
-//         }, {
-//             "pagePath": "pages/me/me",
-//             "text": "我的",
-//             "iconPath": "img/icon3.png",
-//             "selectedIconPath": "img/icon3_on.png",
-//             "selected": false
-//         }, {
-//             "pagePath": "pages/loading/loading",
-//             "text": "发现",
-//             "iconPath": "img/icon1.png",
-//             "selectedIconPath": "img/more.png",
-//             "selected": false
-//         }]
-//     }

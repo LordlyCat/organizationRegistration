@@ -6,15 +6,12 @@ const app = getApp()
 
 Page({
     data: {
+        anthorize: app.globalData.anthorize,
+        loading: true,
         overflow: 'hidden',
         cover: 'coverOff',
         switch: true,
         add: true,
-        // src: {
-        //     src_1: "../../img/icon1.png",
-        //     src_2: "../../img/icon2_on.png",
-        //     src_3: "../../img/icon3.png"
-        // },
         orgnazition: [{
             name: "红岩网校工作站",
             logo: "../../img/redRockLogo.png",
@@ -54,20 +51,141 @@ Page({
         selectedIndex: 1
     },
     onLoad: function(e) {
+        // if (!this.data.anthorize) {
+        //     wx.hideTabBar();
+        // }
+        //wx.hideTabBar();
         //console.log(wx.getStorageSync('openid'));
-        if (!wx.getStorageSync('stuid')) {
+        // if (!wx.getStorageSync('stuid')) {
+        //     this.setData({
+        //         switch: true,
+        //         cover: 'coverOn'
+        //     })
+        //     wx.hideTabBar();
+        // }
+        // console.log(app.globalData.checkFlag);
+        // if (app.globalData.checkFlag) {
+        //     this.setData({
+        //         cover: 'coverOff'
+        //     })
+        //     wx.showTabBar();
+        // } else {
+        //     this.setData({
+        //         switch: true,
+        //         cover: 'coverOn'
+        //     })
+        //     wx.hideTabBar();
+        // }
+
+        let that = this;
+        wx.getSetting({
+            success: function(e) {
+
+                if (wx.getStorageSync('nickName')) {
+                    // wx.switchTab({
+                    //     url: '../index/index'
+                    // })
+                    setTimeout(() => {
+                        // wx.request({
+                        //     // 必需
+                        //     url: 'https://bmtest.redrock.team/user/findbyopenid',
+                        //     data: {
+                        //         openid: wx.getStorageSync('openid')
+                        //     },
+                        //     header: {
+                        //         'Content-Type': 'application/x-www-form-urlencoded'
+                        //     },
+                        //     method: 'POST',
+                        //     success: (res) => {
+                        //         console.log('user', res)
+                        //         console.log(res.header.authorization)
+                        //         wx.setStorage({
+                        //             key: 'authorization',
+                        //             data: res.header.authorization
+                        //         })
+                        //         wx.setStorage({
+                        //             key: 'stuid',
+                        //             data: res.data.stuid
+                        //         })
+                        //         wx.setStorage({
+                        //             key: 'stuname',
+                        //             data: res.data.stuname
+                        //         })
+                        //         wx.setStorage({
+                        //             key: 'phonenum',
+                        //             data: res.data.phonenum
+                        //         })
+                        //     },
+                        //     fail: (res) => {
+                        //         console.log(res)
+                        //     },
+                        //     complete: (res) => {
+
+                        //     }
+                        // })
+                        // wx.switchTab({
+                        //     url: '../index/index'
+                        // })
+                    }, 1500)
+                } else {
+                    app.globalData.anthorize = false;
+                    that.setData({
+                        anthorize: false
+                    })
+
+                }
+            }
+        })
+        if (!this.data.anthorize) {
+            wx.hideTabBar();
+        }
+    },
+    onShow: function(e) {
+        // console.log('onshow', app.globalData.checkFlag)
+        // if (app.globalData.checkFlag) {
+        //     this.setData({
+        //         cover: 'coverOff'
+        //     })
+        //     wx.showTabBar();
+        // } else {
+        //     this.setData({
+        //         switch: true,
+        //         cover: 'coverOn'
+        //     })
+        //     wx.hideTabBar();
+        // }
+    },
+    getUserInfoss: function(e) {
+        //console.log(app.globalData.checkFlag)
+        //console.log(e.detail.rawData);
+        if (!app.globalData.checkFlag) {
+            wx.hideTabBar();
             this.setData({
                 switch: true,
                 cover: 'coverOn'
             })
+        } else {
+            wx.showTabBar();
         }
-        if (app.globalData.checkFlag) {
-            this.setData({
-                cover: 'coverOff'
-            })
-        }
+
+        this.setData({
+            anthorize: true
+        })
+        app.globalData.userInfo = JSON.parse(e.detail.rawData);
+        wx.setStorage({
+            key: "nickName",
+            data: JSON.parse(e.detail.rawData).nickName
+        })
+        wx.setStorage({
+            key: "avatarUrl",
+            data: JSON.parse(e.detail.rawData).avatarUrl
+        })
+        // wx.switchTab({
+        //     url: '../index/index'
+        // })
     },
     register: function(e) {
+        wx.hideTabBar();
         console.log(e);
         let data = this.data;
         this.setData({
@@ -93,7 +211,8 @@ Page({
             selected: [],
             cover: 'coverOff',
             wanted: 1
-        })
+        });
+        wx.showTabBar();
     },
     selectStatement: function(e) {
         let data = this.data;
@@ -171,6 +290,7 @@ Page({
                         overflow: 'visible',
                         cover: 'coverOff'
                     });
+                    wx.showTabBar();
                     wx.setStorage({
                         key: "stuid",
                         data: obj.stuid
@@ -332,6 +452,7 @@ Page({
             that.setData({
                 cover: "coverOff"
             })
+            wx.showTabBar();
         }).catch(function(err) {
 
             console.log(err);

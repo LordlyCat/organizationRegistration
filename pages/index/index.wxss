@@ -1,7 +1,6 @@
 /**index.wxss**/
 
-
-/**index.wxss**/
+@import "../loading/loading.wxss";
 
 .container {
     position: relative;

@@ -8,8 +8,13 @@ Page({
         let that = this;
         wx.getSetting({
             success: function(e) {
-
+                wx.switchTab({
+                    url: '../index/index'
+                })
                 if (wx.getStorageSync('nickName')) {
+                    wx.switchTab({
+                        url: '../index/index'
+                    })
                     setTimeout(() => {
                         // wx.request({
                         //     // 必需
@@ -63,6 +68,7 @@ Page({
         })
     },
     getUserInfo: function(e) {
+        console.log(222222333)
         console.log(e.detail.rawData);
         app.globalData.userInfo = JSON.parse(e.detail.rawData);
         wx.setStorage({

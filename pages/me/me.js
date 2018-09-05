@@ -191,6 +191,7 @@ Page({
         })
     },
     modifyPersonal: function(e) {
+        wx.hideTabBar();
         this.setData({
             cover: true,
             stuid: wx.getStorageSync('stuid'),
@@ -204,6 +205,7 @@ Page({
         })
     },
     quitModifyP: function(e) {
+        wx.showTabBar();
         this.setData({
             cover: false
         })
@@ -302,6 +304,7 @@ Page({
                         key: 'stuname',
                         data: newPersonal.stuname
                     })
+                    wx.showTabBar();
                 } else {
                     wx.showModal({
                         title: '修改失败',
