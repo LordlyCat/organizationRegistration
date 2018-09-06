@@ -98,10 +98,10 @@ Page({
                         //     method: 'POST',
                         //     success: (res) => {
                         //         console.log('user', res)
-                        //         console.log(res.header.authorization)
+                        //         console.log(res.header.Authorization)
                         //         wx.setStorage({
-                        //             key: 'authorization',
-                        //             data: res.header.authorization
+                        //             key: 'Authorization',
+                        //             data: res.header.Authorization
                         //         })
                         //         wx.setStorage({
                         //             key: 'stuid',
@@ -141,19 +141,7 @@ Page({
         }
     },
     onShow: function(e) {
-        // console.log('onshow', app.globalData.checkFlag)
-        // if (app.globalData.checkFlag) {
-        //     this.setData({
-        //         cover: 'coverOff'
-        //     })
-        //     wx.showTabBar();
-        // } else {
-        //     this.setData({
-        //         switch: true,
-        //         cover: 'coverOn'
-        //     })
-        //     wx.hideTabBar();
-        // }
+
     },
     getUserInfoss: function(e) {
         //console.log(app.globalData.checkFlag)
@@ -264,8 +252,8 @@ Page({
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 success: (res) => {
-                    console.log("seccess", res.header.authorization);
-                    if (!res.header.authorization) {
+                    console.log("seccess", res);
+                    if (!res.header.Authorization) {
                         console.log("sign fail");
                         wx.hideLoading();
                         wx.showModal({
@@ -276,9 +264,13 @@ Page({
                         return;
                     }
                     wx.setStorage({
-                        key: "authorization",
-                        data: res.header.authorization
-                    })
+                        key: "Authorization",
+                        data: res.header.Authorization,
+                        success: () => {
+                            console.log("setFirst")
+                        }
+                    });
+                    //console.log('set1', res.header.Authorization)
                     wx.hideLoading();
                     wx.showToast({
                         title: '绑定成功',
@@ -419,7 +411,7 @@ Page({
                     method: 'POST',
                     header: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        authorization: wx.getStorageSync('authorization')
+                        Authorization: wx.getStorageSync('Authorization')
                     },
                     success: (res) => {
 

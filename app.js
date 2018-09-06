@@ -36,7 +36,10 @@ App({
                             that.checkUser(res.data);
                             wx.setStorage({
                                 key: "openid",
-                                data: res.data
+                                data: res.data,
+                                success: () => {
+                                    console.log('openid:', res.data)
+                                }
                             })
                         }
                     })
@@ -58,13 +61,13 @@ App({
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: (res) => {
-                if (res.header.authorization) {
+                if (res.header.Authorization) {
 
                     this.globalData.checkFlag = true;
                     console.log('checkUser:', this.globalData.checkFlag)
                     wx.setStorage({
-                        key: "authorization",
-                        data: res.header.authorization
+                        key: "Authorization",
+                        data: res.header.Authorization
                     })
                     wx.setStorage({
                         key: "stuid",

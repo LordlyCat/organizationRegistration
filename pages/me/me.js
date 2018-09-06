@@ -119,6 +119,7 @@ Page({
     },
     getOrz: function(e) {
         let that = this;
+        console.log('getOrz', wx.getStorageSync('Authorization'));
         wx.request({
             // 必需
             url: 'https://bmtest.redrock.team/msg/cinfo',
@@ -127,7 +128,7 @@ Page({
             },
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                authorization: wx.getStorageSync('authorization')
+                Authorization: wx.getStorageSync('Authorization')
             },
             method: 'POST',
             success: (res) => {
@@ -274,7 +275,7 @@ Page({
             },
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                authorization: wx.getStorageSync('authorization')
+                Authorization: wx.getStorageSync('Authorization')
             },
             method: 'POST',
             success: (res) => {
@@ -352,7 +353,7 @@ Page({
             },
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                authorization: wx.getStorageSync('authorization')
+                Authorization: wx.getStorageSync('Authorization')
             },
             method: 'POST',
             success: (res) => {
@@ -444,7 +445,7 @@ Page({
             },
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                authorization: wx.getStorageSync('authorization')
+                Authorization: wx.getStorageSync('Authorization')
             },
             method: 'POST',
             success: (res) => {
