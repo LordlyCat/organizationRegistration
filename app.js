@@ -20,6 +20,7 @@ App({
         let that = this;
         wx.login({
             success: res => {
+                console.log(res)
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
                 if (res.code) {
                     //拿openID
@@ -33,6 +34,7 @@ App({
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         success: function(res) {
+                            console.log(res);
                             that.checkUser(res.data);
                             wx.setStorage({
                                 key: "openid",

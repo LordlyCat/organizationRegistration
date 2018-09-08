@@ -45,6 +45,8 @@
                         </view>
                         <block wx:if="{{item.show}}">
                             <view class="news" wx:for="{{item.news}}" wx:key="*this">
+                                <text>{{item.info}}</text>
+                                <text class="time">{{item.time}}</text>
                             </view>
                         </block>
                     </block>
@@ -60,17 +62,17 @@
             <view class="information username">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/user.png" mode="scaleToFill"></image>
-                <input id="stuname" bindinput="getInput" type="text" placeholder="{{stuname}}" placeholder-class="placeholder"></input>
+                <input id="stuname" bindinput="getInput" type="text" placeholder="" placeholder-class="placeholder"></input>
             </view>
             <view class="information studentID">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
-                <input id="stuid" bindinput="getInput" type="number" placeholder="{{stuid}}" placeholder-class="placeholder"></input>
+                <input id="stuid" bindinput="getInput" type="number" placeholder="" placeholder-class="placeholder"></input>
             </view>
             <view class="information phoneNumber">
                 <text class="asterisk third">*</text>
                 <image class="icon" src="../../img/phone.png" mode="scaleToFill"></image>
-                <input id="phonenum" bindinput="getInput" type="number" placeholder="{{phonenum}}" placeholder-class="placeholder"></input>
+                <input id="phonenum" bindinput="getInput" type="number" placeholder="" placeholder-class="placeholder"></input>
             </view>
             <button bind:tap="checkModifyPersonal">确定</button>
         </view>

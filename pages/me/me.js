@@ -53,7 +53,11 @@ Page({
         arr.forEach((item) => {
             let oname = item.oname;
             let l = data.length;
-
+            for (var i = 0; i < item.info.length; i++) {
+                item.info[i] = { ...item.info[i],
+                    time: item.info[i].time.slice(0, 19)
+                }
+            }
             if (l === 0) {
                 data.push({
                     oname: item.oname,
@@ -119,7 +123,7 @@ Page({
     },
     getOrz: function(e) {
         let that = this;
-        console.log('getOrz', wx.getStorageSync('Authorization'));
+        //console.log('getOrz', wx.getStorageSync('Authorization'));
         wx.request({
             // 必需
             url: 'https://bmtest.redrock.team/msg/cinfo',

@@ -181,11 +181,28 @@ page {
 
 .news {
     padding: 40rpx;
+    padding-left: 55rpx;
     font-family: PingFangSC-Regular;
     font-size: 20rpx;
     color: #666666;
     text-align: justify;
     border-bottom: solid 1px lightgray;
+}
+
+.news text{
+    display: block;
+    font-family: PingFangSC-Regular;
+    font-size: 20rpx;
+    color: #666666;
+    text-align: justify;
+    line-height: 50rpx;
+}
+
+.time{
+    padding-top: 0;
+    opacity: 0.8;
+    text-align: right !important;
+    
 }
 
 .blanck {

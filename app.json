@@ -9,7 +9,7 @@
 	"window": {
 		"backgroundTextStyle": "light",
 		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "青春有约",
+		"navigationBarTitleText": "青春邮约",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
