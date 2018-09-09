@@ -160,10 +160,12 @@ page {
 }
 
 .moreTab {
+    position: relative;
     display: inline-block;
     float: right;
     width: 100rpx;
     height: 103rpx;
+    border-radius: 
 }
 
 .statement {

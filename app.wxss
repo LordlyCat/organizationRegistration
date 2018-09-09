@@ -58,11 +58,13 @@
 }
 
 .redSpot{
-    float: right;
+    position: absolute;
     display: inline-block;
-    margin-top: 40rpx;
+    /*margin-top: 40rpx;*/
     width: 12rpx;
     height: 12rpx;
     background: red;
     border-radius: 50%;
+    top: 42rpx;
+    left: 95rpx;
 }

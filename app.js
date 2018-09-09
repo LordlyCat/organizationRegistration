@@ -93,6 +93,44 @@ App({
             complete: (res) => {}
         })
     },
+    getNewNews: function(e) {
+        let that = this;
+        wx.request({
+            url: 'https://bmtest.redrock.team/msg/cinfo',
+            data: {
+                openid: wx.getStorageSync('openid')
+            },
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Authorization: wx.getStorageSync('Authorization')
+            },
+            method: 'POST',
+            success: (res) => {
+                let newFlag = false;
+                for (var i = 0; i < res.data.length; i++) {
+                    if (res.data[i].see === 0) {
+                        console.log("new");
+                        newFlag = true;
+                        wx.showTabBarRedDot({
+                            index: 2
+                        })
+                        break;
+                    }
+                }
+                if (!newFlag) {
+                    wx.hideTabBarRedDot({
+                        index: 2
+                    })
+                }
+            },
+            fail: (res) => {
+
+            },
+            complete: (res) => {
+
+            }
+        })
+    },
     globalData: {
         anthorize: false,
         checkFlag: false,
@@ -100,5 +138,6 @@ App({
     },
     onShow: function(e) {
         //wx.hideTabBar();
+        this.getNewNews();
     }
 })

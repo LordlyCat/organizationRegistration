@@ -1,5 +1,5 @@
-<!-- <import src="../../template/template.wxml" />
-<template is="tab" data="{{...src}}" /> -->
+<import src="../../template/tabBar.wxml" />
+
 <view wx:if="{{!modify}}">
     <view class="me" bind:tap="modifyPersonal">
         <!-- <view class="headWrapper">
@@ -29,16 +29,18 @@
                 <view class="orgnazitionName">
                     <text>{{item.oname}}</text>
                     <view class="moreTab" id="item-{{index}}" bind:tap="showStatement" data-name="{{item.name}}" data-index="{{index}}">
+                        <template is="redSpot" wx:if="{{item.see == 0}}" />
                         <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                         <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
                     </view>
-                    <!-- <template is="redSpot" /> -->
+                    
                 </view>
                 <block wx:if="{{item.show}}">
                     <block wx:for="{{item.statement}}" wx:key="*this">
                         <view class="statement">
                             <text>{{item.dname}}</text>
-                            <view class="moreTab" id="i-{{index}}" data-orIndex="{{item.index}}" data-index="{{index}}" bind:tap="showNews">
+                            <view class="moreTab" id="i-{{index}}" data-orIndex="{{item.index}}" data-index="{{index}}" data-cid="{{item.id}}" bind:tap="showNews">
+                                <template is="redSpot" wx:if="{{item.see == 0}}" />
                                 <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                                 <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
                             </view>

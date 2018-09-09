@@ -54,6 +54,7 @@ Page({
             let oname = item.oname;
             let l = data.length;
             for (var i = 0; i < item.info.length; i++) {
+
                 item.info[i] = { ...item.info[i],
                     time: item.info[i].time.slice(0, 19)
                 }
@@ -63,6 +64,7 @@ Page({
                     oname: item.oname,
                     show: false,
                     statement: [{
+                        id: item.id,
                         index: l,
                         dname: item.dname,
                         show: false,
@@ -77,6 +79,7 @@ Page({
             for (var i = 0; i < data.length; i++) {
                 if (data[i].oname === oname) {
                     data[i].statement.push({
+                        id: item.id,
                         index: i,
                         dname: item.dname,
                         show: false,
@@ -90,6 +93,7 @@ Page({
                         oname: item.oname,
                         show: false,
                         statement: [{
+                            id: item.id,
                             index: l,
                             dname: item.dname,
                             show: false,
@@ -102,7 +106,15 @@ Page({
                 }
             }
         })
-        //console.log(data);
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < data[i].statement.length; j++) {
+                if (data[i].statement[j].see == 0) {
+                    data[i].see = 0;
+                }
+            }
+        }
+        console.log(data);
         return data;
     },
     onLoad: function(e) {
@@ -123,7 +135,6 @@ Page({
     },
     getOrz: function(e) {
         let that = this;
-        //console.log('getOrz', wx.getStorageSync('Authorization'));
         wx.request({
             // 必需
             url: 'https://bmtest.redrock.team/msg/cinfo',
@@ -136,7 +147,7 @@ Page({
             },
             method: 'POST',
             success: (res) => {
-                console.log(res);
+                console.log(res.data);
 
                 that.setData({
                     orgnazition: that.dealData(res.data)
@@ -170,6 +181,9 @@ Page({
         });
     },
     showNews: function(e) {
+        //if (e.) {}
+        console.log(e.currentTarget.dataset);
+
         let index = parseInt(e.currentTarget.dataset.index, 10);
         let orIndex = parseInt(e.currentTarget.dataset.orindex, 10);
         let arr = this.data.orgnazition;
@@ -178,11 +192,43 @@ Page({
             arr[orIndex].statement[index].show = false;
         } else {
             arr[orIndex].statement[index].show = true;
+            if (arr[orIndex].statement[index].see == 0) {
+                console.log(e.currentTarget.dataset.cid);
+                this.hasSaw(e.currentTarget.dataset.cid);
+                arr[orIndex].statement[index].see = 1;
+                arr[orIndex].see = 1;
+            }
         }
 
         this.setData({
             orgnazition: arr
         });
+        //this.getOrz();
+    },
+    hasSaw: function(cid) {
+        wx.request({
+            // 必需
+            url: 'https://bmtest.redrock.team/msg/usersee',
+            data: {
+                openid: wx.getStorageSync('openid'),
+                cid: cid
+            },
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Authorization: wx.getStorageSync('Authorization')
+            },
+            method: 'POST',
+            success: (res) => {
+                console.log(res);
+                app.getNewNews();
+            },
+            fail: (res) => {
+
+            },
+            complete: (res) => {
+
+            }
+        })
     },
     gotoModify: function(e) {
         this.setData({
