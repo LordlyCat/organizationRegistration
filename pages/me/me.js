@@ -42,6 +42,21 @@ Page({
         }, {
             name: "校团委办公室",
             statement: ['校团委办公室']
+        }, {
+            name: "校学生会",
+            statement: ['综合部', '学习部', '宣传部', '权益提案部', '生活服务部', '文艺部', '体育部', '女生部']
+        }, {
+            name: "学生科技联合会",
+            statement: ['综合部', '科技人文部', '项目管理部', '媒体运营部', '科创竞赛部', '信息部']
+        }, {
+            name: "青年志愿者协会",
+            statement: ['综合管理部', '青年志愿者服务总队', '实践服务部', '宣传推广部']
+        }, {
+            name: "大学生艺术团",
+            statement: ['管乐团', '民乐团', '舞蹈团', '合唱团', '话剧团', '综合部']
+        }, {
+            name: "学生社团联合会",
+            statement: ['综合部', '宣传部', '社团服务部', '社团活动部']
         }],
         thisOrz: {}
     },
@@ -53,12 +68,19 @@ Page({
         arr.forEach((item) => {
             let oname = item.oname;
             let l = data.length;
-            for (var i = 0; i < item.info.length; i++) {
+            if (item.info.length === 0) {
+                item.info[0] = {
+                    info: "暂无消息通知，请耐心等待，时时留意"
+                }
+            } else {
+                for (var i = 0; i < item.info.length; i++) {
 
-                item.info[i] = { ...item.info[i],
-                    time: item.info[i].time.slice(0, 19)
+                    item.info[i] = { ...item.info[i],
+                        time: item.info[i].time.slice(0, 19)
+                    }
                 }
             }
+
             if (l === 0) {
                 data.push({
                     oname: item.oname,
@@ -132,6 +154,7 @@ Page({
     },
     onShow: function(e) {
         this.getOrz();
+        app.getNewNews();
     },
     getOrz: function(e) {
         let that = this;
@@ -197,6 +220,13 @@ Page({
                 this.hasSaw(e.currentTarget.dataset.cid);
                 arr[orIndex].statement[index].see = 1;
                 arr[orIndex].see = 1;
+                for (var i = 0; i < arr[orIndex].statement.length; i++) {
+                    console.log()
+                    if (arr[orIndex].statement[i].see == 0) {
+                        arr[orIndex].see = 0;
+                    }
+                }
+
             }
         }
 
@@ -307,6 +337,10 @@ Page({
                 }
             }
         })
+
+        if (newPersonal["phonenum"].length === 0 || re.test(newPersonal["phonenum"])) {
+            newPersonal["phonenum"] = "--";
+        }
 
         if (flag) {
             wx.showModal({

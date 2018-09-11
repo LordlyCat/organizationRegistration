@@ -23,6 +23,7 @@
 }
 
 .logo {
+    overflow: hidden;
     display: inline-block;
     float: left;
     width: 88rpx;
@@ -64,6 +65,7 @@
     font-size: 28rpx;
     text-align: center;
     line-height: 55rpx;
+    font-weight: lighter;
 }
 
 .detail {

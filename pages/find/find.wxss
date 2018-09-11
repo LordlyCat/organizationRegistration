@@ -31,6 +31,7 @@ swiper-item {
     height: 365rpx;
     margin: 40rpx auto;
     margin-bottom: 30rpx;
+    border: solid 1rpx lightgray;
 }
 
 .box .orgnazitionName {

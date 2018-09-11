@@ -12,29 +12,6 @@ page {
     margin: 31rpx auto;
 }
 
-
-
-
-
-
-
-
-
-
-/*.headWrapper{
-    overflow: hidden;
-    display: inline-block;
-    float: left;
-    border-radius: 50%;
-    width: 124rpx;
-    height: 124rpx;
-    margin-top: 32rpx;
-    margin-left: 36rpx;
-    border-radius: 50%;
-    background: pink;
-}
-*/
-
 .me .head {
     display: block;
     float: left;
@@ -120,13 +97,13 @@ page {
     background: white;
     box-shadow: 0 8px 20px 0 #E5EDF6;
     margin: 14rpx auto;
+    padding-bottom: 30rpx;
 }
 
 .orgnazition,
 .statement {
     width: 645rpx;
     margin: 0 auto;
-    /*border-bottom: solid 1px lightgray;*/
 }
 
 .orgnazitionName {
@@ -419,12 +396,21 @@ page {
     margin-top: 46rpx;
 }
 
+.quitSelectWrapper{
+    width: 80rpx;
+    height: 80rpx;
+    position: absolute;
+    display: inline-block;
+    top: 5rpx;
+    left: 539rpx;
+}
+
 .quitSelect {
     position: absolute;
     width: 40rpx;
     height: 40rpx;
-    top: 22rpx;
-    left: 559rpx;
+    top: 20rpx;
+    left: 18rpx;
 }
 
 .modifyChoose .statement {

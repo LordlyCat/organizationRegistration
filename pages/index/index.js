@@ -8,11 +8,48 @@ Page({
     data: {
         anthorize: app.globalData.anthorize,
         loading: true,
-        overflow: 'hidden',
+        overflow: '',
         cover: 'coverOff',
         switch: true,
         add: true,
+        QR: false,
+        QR_code: 0,
         orgnazition: [{
+            name: "校团委办公室",
+            logo: '../../img/gongqingtuan.jpg',
+            statement: ['校团委办公室'],
+            dec: "校团委办公室是共青团重庆邮电大学委员会直属机构之一。"
+        }, {
+            name: "校团委组织部",
+            logo: '../../img/gongqingtuan.jpg',
+            statement: ['校团委组织部'],
+            dec: "重庆邮电大学团委组织部是校团委核心直属部室。"
+        }, {
+            name: "校团委宣传部",
+            logo: '../../img/gongqingtuan.jpg',
+            statement: ['校团委宣传部'],
+            dec: "校团委宣传部是我校团委的重要部门，担负着向学校、校团委各学生组织传达信息的重要任务。"
+        }, {
+            name: "校学生会",
+            logo: "../../img/xsh.jpg",
+            statement: ['综合部', '学习部', '宣传部', '权益提案部', '生活服务部', '文艺部', '体育部', '女生部'],
+            dec: "学生会是由校党委、市学联领导，由校团委具体指导的群众性组织。"
+        }, {
+            name: "学生科技联合会",
+            logo: "../../img/xskjlhh.png",
+            statement: ['综合部', '科技人文部', '项目管理部', '媒体运营部', '科创竞赛部', '信息部'],
+            dec: "重庆邮电大学学生科技联合会简称学生科联。"
+        }, {
+            name: "学生社团联合会",
+            logo: "../../img/xsstlhh.png",
+            statement: ['综合部', '宣传部', '社团服务部', '社团活动部'],
+            dec: "重庆邮电大学学生社团联合会在校团委的直接指导下，管理社团工作、服务社团发展的学生组织。"
+        }, {
+            name: "青年志愿者协会",
+            logo: "../../img/qnzyzxh_banner.jpg",
+            statement: ['综合管理部', '青年志愿者服务总队', '实践服务部', '宣传推广部'],
+            dec: "重庆邮电大学青年志愿者协会是校团委直属管辖的七大学生组织之一。"
+        }, {
             name: "红岩网校工作站",
             logo: "../../img/redRockLogo.png",
             statement: ['产品策划运营部',
@@ -20,20 +57,10 @@ Page({
             ],
             dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
         }, {
-            name: "校团委宣传部",
-            logo: '../../img/gongqingtuan.jpg',
-            statement: ['校团委宣传部'],
-            dec: "校团委宣传部是我校团委的重要部门，担负着向学校、校团委各学生组织传达信息的重要任务"
-        }, {
-            name: "校团委组织部",
-            logo: '../../img/gongqingtuan.jpg',
-            statement: ['校团委组织部'],
-            dec: "重庆邮电大学团委组织部是校团委核心直属部室。"
-        }, {
-            name: "校团委办公室",
-            logo: '../../img/gongqingtuan.jpg',
-            statement: ['校团委办公室'],
-            dec: "校团委办公室是共青团重庆邮电大学委员会直属机构之一。"
+            name: "大学生艺术团",
+            logo: "../../img/dxsyst.jpg",
+            statement: ['管乐团', '民乐团', '舞蹈团', '合唱团', '话剧团', '综合部'],
+            dec: "重庆邮电大学大学生艺术团是在校团委直接指导管理下的学生艺术团体。"
         }],
         wanted: 1,
         index: 0,
@@ -51,6 +78,47 @@ Page({
         selectedIndex: 1
     },
     onLoad: function(e) {
+        console.log(e);
+        // wx.request({
+        //     // 必需
+        //     url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx51c8e3c6a32c81f1&secret=5db31c056cd0333c6aba9e5ae61e679b',
+        //     data: {
+
+        //     },
+        //     header: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     success: (res) => {
+        //         console.log("token", res)
+        //     },
+        //     fail: (res) => {
+
+        //     },
+        //     complete: (res) => {
+
+        //     }
+        // })
+        // 
+        // wx.request({
+        //     // 必需
+        //     url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${code}`,
+        //     data: {
+        //         scene: 123
+        //     },
+        //     header: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     method: 'POST',
+        //     success: (res) => {
+        //         console.log(res);
+        //     },
+        //     fail: (res) => {
+
+        //     },
+        //     complete: (res) => {
+
+        //     }
+        // })
         // if (!this.data.anthorize) {
         //     wx.hideTabBar();
         // }
@@ -139,6 +207,15 @@ Page({
         if (!this.data.anthorize) {
             wx.hideTabBar();
         }
+
+        //获取二维码参数
+        if (e.id) {
+            this.setData({
+                QR: true,
+                QR_code: e.id
+            })
+            this.goToJoin(e.id);
+        }
     },
     onShow: function(e) {
 
@@ -152,6 +229,8 @@ Page({
                 switch: true,
                 cover: 'coverOn'
             })
+        } else if (this.data.QR) {
+            wx.hideTabBar();
         } else {
             wx.showTabBar();
         }
@@ -173,18 +252,21 @@ Page({
         // })
     },
     register: function(e) {
+        this.goToJoin(e.currentTarget.dataset.index);
+    },
+    goToJoin: function(e) {
         wx.hideTabBar();
         console.log(e);
         let data = this.data;
         this.setData({
-            index: e.currentTarget.dataset.index,
+            index: e,
             cover: 'coverOn',
             overflow: 'hidden',
             switch: false,
             add: true,
             selectedNow: {
-                oname: data.orgnazition[e.currentTarget.dataset.index].name,
-                dname: data.orgnazition[e.currentTarget.dataset.index].statement[0]
+                oname: data.orgnazition[e].name,
+                dname: data.orgnazition[e].statement[0]
             }
         })
     },
@@ -198,6 +280,7 @@ Page({
         this.setData({
             selected: [],
             cover: 'coverOff',
+            overflow: 'visible',
             wanted: 1
         });
         wx.showTabBar();
@@ -227,8 +310,11 @@ Page({
                     return;
                 }
             }
-
         })
+
+        if (obj["phonenum"].length === 0 || re.test(obj["phonenum"])) {
+            obj["phonenum"] = "--";
+        }
 
         if (flag) {
             wx.showModal({
@@ -294,7 +380,10 @@ Page({
                     wx.setStorage({
                         key: "stuname",
                         data: obj.stuname
-                    })
+                    });
+                    if (this.data.QR) {
+                        this.goToJoin(this.data.QR_code)
+                    }
                 },
                 fail: (res) => {
                     console.log("fail", res);
@@ -442,7 +531,8 @@ Page({
                 mask: true
             });
             that.setData({
-                cover: "coverOff"
+                cover: "coverOff",
+                overflow: 'visible',
             })
             wx.showTabBar();
         }).catch(function(err) {

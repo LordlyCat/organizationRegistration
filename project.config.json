@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -34,7 +34,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "二维码测试",
+					"pathName": "pages/index/index",
+					"query": "id=3",
+					"scene": "1012"
+				}
+			]
 		}
 	}
 }

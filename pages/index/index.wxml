@@ -13,7 +13,7 @@
             </view>
             <view class="detail">{{item.dec}}</view>
         </view>
-        <view class="blank"></view>
+        <!-- <view class="blank"></view> -->
     </scroll-view>
     <view class="{{cover}}">
         <view class="bundle" wx:if="{{switch}}">

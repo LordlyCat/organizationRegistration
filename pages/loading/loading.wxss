@@ -8,7 +8,7 @@
 
 .loading .appName{
     display: block;
-    width: 260rpx;
+    width: 209rpx;
     height: 45rpx;
     margin: 58rpx auto;
     margin-bottom: 0;

@@ -55,7 +55,7 @@
                 </block>
             </view>
         </block>
-        <view class="blanck"></view>
+        <!-- <view class="blanck"></view> -->
     </view>
     <view class="cover" wx:if="{{cover}}">
         <view class="modifyInformation bundle">
@@ -103,7 +103,9 @@
     </view>
     <view class="modifyChoose" wx:if="{{!delete}}">
         <text>修改报名部门</text>
-        <image class="quitSelect" bind:tap="quitModify" src="../../img/cancel.png" mode="scaleToFill"></image>
+        <view class="quitSelectWrapper" bind:tap="quitModify">
+            <image class="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
+        </view>
         <view class="chooseWrapper">
             <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="getPicker">
                 <picker-view-column>

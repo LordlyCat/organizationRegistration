@@ -75,6 +75,8 @@ App({
                         key: "stuid",
                         data: res.data.stuid
                     })
+
+
                     wx.setStorage({
                         key: "phonenum",
                         data: res.data.phonenum
