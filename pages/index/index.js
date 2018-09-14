@@ -257,7 +257,8 @@ Page({
     },
     submitInformation: function() {
         let obj = this.data.information;
-        if (app.checkInput(obj)) {
+        let title = '绑定失败';
+        if (app.checkInput(obj, title)) {
             wx.showLoading({
                 title: '加载中',
                 mask: true
@@ -366,7 +367,7 @@ Page({
     quitSelect: function(e) {
         this.setData({
             // cover: 'coverOff',
-            overflow: 'visible',
+            overflow: 'hidden',
             switch: false,
             add: true
         })

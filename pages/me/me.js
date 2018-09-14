@@ -1,6 +1,5 @@
 const app = getApp()
-//let name = app.globalData.userInfo.nickName;
-//console.log(app.globalData.userInfo)
+
 Page({
     data: {
         cover: false,
@@ -9,11 +8,12 @@ Page({
         modify: false,
         delete: false,
         change: false,
-        src: {
-            src_1: "../../img/icon1.png",
-            src_2: "../../img/icon2.png",
-            src_3: "../../img/icon3_on.png"
-        },
+        disabled: false,
+        // src: {
+        //     src_1: "../../img/icon1.png",
+        //     src_2: "../../img/icon2.png",
+        //     src_3: "../../img/icon3_on.png"
+        // },
         nickame: '',
         avatarUrl: '',
         stuname: '',
@@ -326,11 +326,23 @@ Page({
         }
         console.log(this.data.newPersonal)
     },
+    move: function(e) {
+        //避免微信垃圾控件因滑动过快不能及时获取到值
+        this.setData({
+            disabled: true
+        })
+        let that = this;
+        setTimeout(function(e) {
+            that.setData({
+                disabled: false
+            })
+        }, 1000)
+    },
     checkModifyPersonal: function(e) {
         let that = this;
         let newPersonal = this.data.newPersonal
-
-        if (!app.checkInput(newPersonal)) {
+        let title = '修改失败';
+        if (!app.checkInput(newPersonal, title)) {
             return;
         }
         wx.request({

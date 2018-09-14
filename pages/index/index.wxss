@@ -235,7 +235,7 @@ page {
     width: 38%;
     background: #9062F7;
     box-shadow: 0 15px 35px 0 #DFDBF7;
-    border-radius: 30rpx;
+    border-radius: 40rpx;
     color: #FFFFFF;
     font-size: 32rpx;
     text-shadow: 0 2rpx 0 #6E36ED;
@@ -276,17 +276,28 @@ page {
 }
 
 .quitSelect{
-    position: absolute;
     width: 50rpx;
     height: 50rpx;
-    top: 22rpx;
-    left: 539rpx;
+    margin-left: 25rpx;
+    margin-top: 14rpx;
+    /*top: 22rpx;
+    left: 539rpx;*/
+}
+
+.quitSelectWrapper{
+    display: inline-block;
+    position: absolute;
+    width: 100rpx;
+    height: 100rpx;
+    top: 10rpx;
+    left: 510rpx;
 }
 
 .add {
     position: absolute;
     width: 70rpx;
     height: 70rpx;
+    margin-left: 20rpx;
     top: 42rpx;
     left: 509rpx;
 }
@@ -300,9 +311,20 @@ page {
 .join button {
     display: block;
     margin-top: 120rpx;
-    font-size: 28rpx;
+    /*font-size: 28rpx;
     line-height: 85rpx;
+    border: none;*/
+
+    width: 492rpx;
+    height: 85rpx;
+    background: rgba(144, 98, 247, 1);
+    box-shadow: 0px 15px 35px 0px rgba(223, 219, 247, 1);
+    border-radius: 40rpx;
     border: none;
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular;
+    color: rgba(255, 255, 255, 1);
+    line-height: 85rpx;
 }
 
 .chooseWrapper {

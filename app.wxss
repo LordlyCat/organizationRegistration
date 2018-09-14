@@ -11,6 +11,10 @@
     /*background: #f6f9fc;*/
 }
 
+button::after{
+    border:none;
+}
+
 .nav {
     position: fixed;
     width: 750rpx;

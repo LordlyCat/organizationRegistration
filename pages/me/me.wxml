@@ -55,7 +55,10 @@
     <view class="cover" wx:if="{{cover}}">
         <view class="modifyInformation bundle">
             <text class="title">修改信息</text>
-            <image class="quitModify" src="../../img/cancel.png" mode="scaleToFill" bind:tap="quitModifyP"></image>
+            <view class="quitModifyWrapper" bind:tap="quitModifyP">
+                <image class="quitModify" src="../../img/cancel.png" mode="scaleToFill"></image>
+            </view>
+            
             <view class="information username">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/user.png" mode="scaleToFill"></image>
@@ -105,13 +108,13 @@
                 <view class="quitSelectWrapper" bind:tap="quitModify">
                     <image class="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
                 </view>
-                <view class="chooseWrapper">
+                <view class="chooseWrapper" bind:touchmove="move">
                     <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="getPicker">
                         <picker-view-column>
                             <view class="statement" wx:for="{{thisOrz.statement}}" wx:key="*this">{{item}}</view>
                         </picker-view-column>
                     </picker-view>
-                    <button bind:tap="checkChange">确定</button>
+                    <button bind:tap="checkChange" disabled="{{disabled}}">确定</button>
                 </view>
             </view>
         </view>

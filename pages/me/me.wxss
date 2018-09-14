@@ -282,12 +282,22 @@ page {
     border: none;
 }
 
-.quitModify {
+.quitModifyWrapper{
+    display: inline-block;
     position: absolute;
-    top: 24rpx;
-    right: 30rpx;
+    width: 80rpx;
+    height: 80rpx;
+    top: 1rpx;
+    right: 10rpx;
+}
+
+.quitModify {
+    /*top: 24rpx;
+    right: 30rpx;*/
     width: 36rpx;
     height: 36rpx;
+    margin-left: 22rpx;
+    margin-top: 25rpx;
 }
 
 .modifyContainer{

@@ -37,7 +37,7 @@
         <view class="selectStatement" wx:if="{{!switch && add}}">
             <text>{{selectedNow.oname}}</text>
             <text id="tips">（右边点击添加更多部门）</text>
-            <image class="add" bind:tap="addWanted" src="../../img/add.png" mode="scaleToFill"></image>
+                <image class="add" bind:tap="addWanted" src="../../img/add.png" mode="scaleToFill"></image>
             <scroll-view scroll-y class="scroll">
                 <view class="stateWrapper">
                     <view class="state" wx:for="{{wanted}}" wx:key="*this" bind:tap="selectStatement" data-index="{{index}}">
@@ -53,7 +53,9 @@
         </view>
         <view class="join" wx:if="{{!add}}" bind:touchmove="move">
             <text>选择部门</text>
-            <image class="quitSelect" bind:tap="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
+            <view class="quitSelectWrapper" bind:tap="quitSelect">
+                <image class="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
+            </view>
             <view class="chooseWrapper">
                 <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="chooseStatement">
                     <picker-view-column>

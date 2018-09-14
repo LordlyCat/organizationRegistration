@@ -134,7 +134,7 @@ App({
             }
         })
     },
-    checkInput: function(obj) {
+    checkInput: function(obj, title) {
         let emptyFlag = false;
         let effectiveIDFlag = false;
         let effectivePhoneFlag = false;
@@ -161,19 +161,19 @@ App({
 
         if (emptyFlag) {
             wx.showModal({
-                title: '绑定失败',
+                title: title,
                 content: '必填项内容不能为空',
                 showCancel: false
             })
         } else if (!effectiveIDFlag) {
             wx.showModal({
-                title: '绑定失败',
+                title: title,
                 content: '学号不合法',
                 showCancel: false
             })
         } else if (!effectivePhoneFlag) {
             wx.showModal({
-                title: '绑定失败',
+                title: title,
                 content: '手机号码不合法',
                 showCancel: false
             })
