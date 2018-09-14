@@ -1,13 +1,9 @@
 <import src="../../template/tabBar.wxml" />
 
-<view wx:if="{{!modify}}">
+<view class="modifyContainer" wx:if="{{!modify}}" style="overflow: {{overflow}};">
     <view class="me" bind:tap="modifyPersonal">
-        <!-- <view class="headWrapper">
-        <open-data class="head" type="userAvatarUrl"></open-data>
-    </view> -->
         <image class="head" src="{{avatarUrl}}" mode="scaleToFill"></image>
         <text class="name">{{nickName}}</text>
-        <!-- <open-data class="name" type="userNickName"></open-data> -->
         <view class="studentID">
             <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
             <text>{{stuid}}</text>
@@ -26,20 +22,19 @@
     <view class="orgnazitionWrapper">
         <block wx:for="{{orgnazition}}" wx:key="*this">
             <view class="orgnazition" id="{{index}}">
-                <view class="orgnazitionName">
+                <view class="orgnazitionName" bind:tap="showStatement" data-name="{{item.name}}" data-index="{{index}}">
                     <text>{{item.oname}}</text>
-                    <view class="moreTab" id="item-{{index}}" bind:tap="showStatement" data-name="{{item.name}}" data-index="{{index}}">
+                    <view class="moreTab" id="item-{{index}}">
                         <template is="redSpot" wx:if="{{item.see == 0}}" />
                         <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                         <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
                     </view>
-                    
                 </view>
                 <block wx:if="{{item.show}}">
                     <block wx:for="{{item.statement}}" wx:key="*this">
-                        <view class="statement">
+                        <view class="statement" data-orIndex="{{item.index}}" data-index="{{index}}" data-cid="{{item.id}}" bind:tap="showNews">
                             <text>{{item.dname}}</text>
-                            <view class="moreTab" id="i-{{index}}" data-orIndex="{{item.index}}" data-index="{{index}}" data-cid="{{item.id}}" bind:tap="showNews">
+                            <view class="moreTab" id="i-{{index}}">
                                 <template is="redSpot" wx:if="{{item.see == 0}}" />
                                 <image wx:if="{{item.show}}" class="{{moreClassName2}}" src="../../img/pick.png" mode="scaleToFill"></image>
                                 <image wx:elif="{{!item.show}}" class="{{moreClassName1}}" src="../../img/more.png" mode="scaleToFill"></image>
@@ -64,55 +59,61 @@
             <view class="information username">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/user.png" mode="scaleToFill"></image>
-                <input id="stuname" bindinput="getInput" type="text" placeholder="" placeholder-class="placeholder"></input>
+                <input id="stuname" bindinput="getInput" type="text" placeholder="姓名" placeholder-class="placeholder" confirm-type="next"></input>
             </view>
             <view class="information studentID">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
-                <input id="stuid" bindinput="getInput" type="number" placeholder="" placeholder-class="placeholder"></input>
+                <input id="stuid" bindinput="getInput" type="number" placeholder="学号" placeholder-class="placeholder"></input>
             </view>
             <view class="information phoneNumber">
-                <text class="asterisk third">*</text>
+                <text class="asterisk">*</text>
                 <image class="icon" src="../../img/phone.png" mode="scaleToFill"></image>
-                <input id="phonenum" bindinput="getInput" type="number" placeholder="" placeholder-class="placeholder"></input>
+                <input id="phonenum" bindinput="getInput" type="number" placeholder="手机号码" placeholder-class="placeholder"></input>
             </view>
             <button bind:tap="checkModifyPersonal">确定</button>
         </view>
     </view>
 </view>
-<view class="modifyWrapper" wx:if="{{modify}}">
-    <image id="quitChange" src="../../img/back.png" mode="scaleToFill" bind:tap="quitChange"></image>
-    <text class="title">修改已报名组织</text>
-    <view class="modifyBox" wx:for="{{orgnazition}}" wx:key="*this">
-        <view class="modifyOrz">
-            <text>{{item.oname}}</text>
+<view class="modifyContainer" wx:if="{{modify}}" style="overflow: {{overflow}};">
+    <view class="modifyWrapper">
+        <image id="quitChange" src="../../img/back.png" mode="scaleToFill" bind:tap="quitChange"></image>
+        <text class="title">修改已报名组织</text>
+        <view class="modifyBox" wx:for="{{orgnazition}}" wx:key="*this">
+            <view class="modifyOrz">
+                <text>{{item.oname}}</text>
+            </view>
+            <view class="modifyStatement" wx:for="{{item.statement}}" wx:key="*this">
+                <text>{{item.dname}}</text>
+                <view class="deleteTabWrapper" bind:tap="deleteStatement" data-orIndex="{{item.index}}" data-index="{{index}}">
+                    <image class="deleteTab" src="../../img/delete.png" mode="scaleToFill"></image>
+                </view>
+                <view class="modifyTabWrapper" bind:tap="modifyStatement" data-orIndex="{{item.index}}" data-index="{{index}}">
+                    <image class="modifyTab" src="../../img/modify.png" mode="scaleToFill"></image>
+                </view>
+            </view>
+            <view class=""></view>
         </view>
-        <view class="modifyStatement" wx:for="{{item.statement}}" wx:key="*this">
-            <text>{{item.dname}}</text>
-            <image class="deleteTab" src="../../img/delete.png" mode="scaleToFill" bind:tap="deleteStatement" data-orIndex="{{item.index}}" data-index="{{index}}"></image>
-            <image class="modifyTab" src="../../img/modify.png" mode="scaleToFill" bind:tap="modifyStatement" data-orIndex="{{item.index}}" data-index="{{index}}"></image>
-        </view>
-        <view class=""></view>
-    </view>
-</view>
-<view class="cover" wx:if="{{modifyCover}}">
-    <view class="checkDelete" wx:if="{{delete}}">
-        <view>确定删除这个部门的报名吗？</view>
-        <button bind:tap="quitDelete">取消</button>
-        <button class="sure" bind:tap="checkDelete">确定</button>
-    </view>
-    <view class="modifyChoose" wx:if="{{!delete}}">
-        <text>修改报名部门</text>
-        <view class="quitSelectWrapper" bind:tap="quitModify">
-            <image class="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
-        </view>
-        <view class="chooseWrapper">
-            <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="getPicker">
-                <picker-view-column>
-                    <view class="statement" wx:for="{{thisOrz.statement}}" wx:key="*this">{{item}}</view>
-                </picker-view-column>
-            </picker-view>
-            <button bind:tap="checkChange">确定</button>
+        <view class="cover" wx:if="{{modifyCover}}">
+            <view class="checkDelete" wx:if="{{delete}}">
+                <view>确定删除这个部门的报名吗？</view>
+                <button bind:tap="quitDelete">取消</button>
+                <button class="sure" bind:tap="checkDelete">确定</button>
+            </view>
+            <view class="modifyChoose" wx:if="{{!delete}}">
+                <text>修改报名部门</text>
+                <view class="quitSelectWrapper" bind:tap="quitModify">
+                    <image class="quitSelect" src="../../img/cancel.png" mode="scaleToFill"></image>
+                </view>
+                <view class="chooseWrapper">
+                    <picker-view indicator-style="height: 600rpx;" style="width: 100%; height: 300rpx;" bindchange="getPicker">
+                        <picker-view-column>
+                            <view class="statement" wx:for="{{thisOrz.statement}}" wx:key="*this">{{item}}</view>
+                        </picker-view-column>
+                    </picker-view>
+                    <button bind:tap="checkChange">确定</button>
+                </view>
+            </view>
         </view>
     </view>
 </view>

@@ -1,5 +1,5 @@
 page {
-    background: #F6F8FC;
+    background: #F3F8FD;
 }
 
 .me {
@@ -31,7 +31,7 @@ page {
 
 .me .name {
     display: block;
-    margin-left: 189rpx;
+    margin-left: 200rpx;
     margin-top: 38rpx;
     font-family: PingFangSC-Regular;
     font-size: 30rpx;
@@ -194,6 +194,7 @@ page {
     width: 750rpx;
     height: 100%;
     top: 0;
+    left: 0;
     background: rgba(0, 0, 0, 0.80);
 }
 
@@ -289,6 +290,11 @@ page {
     height: 36rpx;
 }
 
+.modifyContainer{
+    position: relative;
+    height: 100vh;
+}
+
 .modifyWrapper {
     box-sizing: border-box;
     overflow: hidden;
@@ -310,14 +316,14 @@ page {
 
 .modifyBox {
     border-bottom: solid 1px lightgray;
-    padding: 30rpx;
+    padding: 30rpx 12rpx 30rpx 30rpx;
 }
 
 .modifyWrapper image {
     position: relative;
     width: 32rpx;
     height: 32rpx;
-    float: right;
+    margin-left: 25rpx;
     margin-top: 8rpx;
 }
 
@@ -327,20 +333,30 @@ page {
     font-family: PingFangSC-Light;
     color: rgba(17, 17, 17, 1);
     line-height: 45rpx;
+    padding-bottom: 10rpx;
 }
 
 .modifyWrapper .modifyTab {
     margin-right: 42rpx;
 }
 
+.deleteTabWrapper, .modifyTabWrapper{
+    float: right;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+    width: 75rpx;
+}
+
+
 .modifyStatement {
     overflow: hidden;
-    margin-top: 25rpx;
-    height: 40rpx;
+    /*margin-top: 25rpx;*/
+    height: 60rpx;
     font-size: 28rpx;
     font-family: PingFangSC-Light;
     color: rgba(68, 68, 68, 1);
-    line-height: 40rpx;
+    line-height: 60rpx;
 }
 
 .checkDelete {
@@ -409,8 +425,8 @@ page {
     position: absolute;
     width: 40rpx;
     height: 40rpx;
-    top: 20rpx;
-    left: 18rpx;
+    top: 14rpx;
+    left: 2rpx;
 }
 
 .modifyChoose .statement {
@@ -445,8 +461,8 @@ page {
     width: 56rpx;
     height: 56rpx;
     position: absolute;
-    top: 40rpx;
-    left: 45rpx;
+    top: 19rpx;
+    left: 30rpx;
     opacity: 0.7;
 }
 

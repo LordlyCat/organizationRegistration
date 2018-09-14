@@ -1,4 +1,7 @@
 /**index.wxss**/
+page {
+    background: #fff;
+}
 
 @import "../loading/loading.wxss";
 
@@ -65,8 +68,8 @@
     font-size: 28rpx;
     text-align: center;
     line-height: 55rpx;
-    font-weight: lighter;
-}
+/*    font-weight: lighter;
+*/}
 
 .detail {
     box-sizing: border-box;
@@ -93,13 +96,6 @@
 .coverOff {
     display: none;
 }
-
-
-
-
-/*page {
-    overflow: hidden;
-}*/
 
 .bundle {
     /*display: none;*/
@@ -193,7 +189,7 @@
     position: relative;
     width: 490rpx;
     height: 60rpx;
-    border-bottom: solid 1px gray;
+    border-bottom: solid 1rpx lightgray;
     margin: 66rpx auto;
 }
 
@@ -230,7 +226,8 @@
     /*background: #9062F7;
     box-shadow: 0 15px 35px 0 #DFDBF7;*/
     font-family: PingFangSC-Regular;
-    margin-bottom: 50rpx;
+    margin-bottom: 30rpx;
+    padding-bottom: 20rpx;
 }
 
 .btn button{
@@ -238,7 +235,7 @@
     width: 38%;
     background: #9062F7;
     box-shadow: 0 15px 35px 0 #DFDBF7;
-    border-radius: 10%;
+    border-radius: 30rpx;
     color: #FFFFFF;
     font-size: 32rpx;
     text-shadow: 0 2rpx 0 #6E36ED;
@@ -270,6 +267,12 @@
     color: #888888;
     text-align: center;
     margin-top: 46rpx;
+}
+
+#tips{
+    font-size: 18rpx;
+    margin-top: 0;
+    line-height: 18rpx;
 }
 
 .quitSelect{

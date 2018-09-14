@@ -4,6 +4,7 @@ const app = getApp()
 Page({
     data: {
         cover: false,
+        overflow: 'visible',
         modifyCover: false,
         modify: false,
         delete: false,
@@ -275,6 +276,7 @@ Page({
         wx.hideTabBar();
         this.setData({
             cover: true,
+            overflow: 'hidden',
             stuid: wx.getStorageSync('stuid'),
             phonenum: wx.getStorageSync('phonenum'),
             stuname: wx.getStorageSync('stuname'),
@@ -288,7 +290,8 @@ Page({
     quitModifyP: function(e) {
         wx.showTabBar();
         this.setData({
-            cover: false
+            cover: false,
+            overflow: 'visible'
         })
     },
     getInput: function(e) {
@@ -326,28 +329,8 @@ Page({
     checkModifyPersonal: function(e) {
         let that = this;
         let newPersonal = this.data.newPersonal
-        let flag = false;
-        let regu = "^[ ]+$";
-        let re = new RegExp(regu);
-        Object.keys(newPersonal).forEach(function(key) {
-            if (key !== 'phonenum') {
-                if (newPersonal[key].length === 0 || re.test(newPersonal[key])) {
-                    flag = true;
-                    return;
-                }
-            }
-        })
 
-        if (newPersonal["phonenum"].length === 0 || re.test(newPersonal["phonenum"])) {
-            newPersonal["phonenum"] = "--";
-        }
-
-        if (flag) {
-            wx.showModal({
-                title: '修改失败',
-                content: '必填项内容不能为空',
-                showCancel: false
-            })
+        if (!app.checkInput(newPersonal)) {
             return;
         }
         wx.request({
@@ -407,15 +390,17 @@ Page({
             },
             complete: (res) => {
                 that.setData({
-                    cover: false
+                    cover: false,
+                    overflow: 'visible'
                 })
             }
         })
     },
     deleteStatement: function(e) {
-        let oname = this.data.orgnazition[e.target.dataset.orindex].oname;
-        let dname = this.data.orgnazition[e.target.dataset.orindex].statement[e.target.dataset.index].dname
+        let oname = this.data.orgnazition[e.currentTarget.dataset.orindex].oname;
+        let dname = this.data.orgnazition[e.currentTarget.dataset.orindex].statement[e.currentTarget.dataset.index].dname
         this.setData({
+            overflow: 'hidden',
             modifyCover: true,
             delete: true,
             deleteName: {
@@ -424,7 +409,7 @@ Page({
                 dname: dname
             }
         })
-
+        wx.hideTabBar();
     },
     checkDelete: function(e) {
         let deleteName = this.data.deleteName;
@@ -448,11 +433,12 @@ Page({
                 console.log(res)
             },
             complete: (res) => {
-
+                wx.showTabBar();
             }
         })
         this.setData({
             modifyCover: false,
+            overflow: 'visible',
             delete: false,
             deleteName: {}
         })
@@ -460,15 +446,17 @@ Page({
     quitDelete: function(e) {
         this.setData({
             modifyCover: false,
+            overflow: 'visible',
             delete: false,
             deleteName: {}
         })
+        wx.showTabBar()
     },
     modifyStatement: function(e) {
-        let oldOname = this.data.orgnazition[e.target.dataset.orindex].oname;
-        let oldDname = this.data.orgnazition[e.target.dataset.orindex].statement[e.target.dataset.index].dname;
-
+        let oldOname = this.data.orgnazition[e.currentTarget.dataset.orindex].oname;
+        let oldDname = this.data.orgnazition[e.currentTarget.dataset.orindex].statement[e.currentTarget.dataset.index].dname;
         this.setData({
+            overflow: 'hidden',
             modifyCover: true,
             delete: false
         })
@@ -490,15 +478,17 @@ Page({
                 newdname: thisOrz.statement[0]
             }
         })
-        console.log(this.data.modifyName)
+        wx.hideTabBar();
     },
     quitModify: function(e) {
         this.setData({
             thisOrz: {},
             modifyCover: false,
+            overflow: 'visible',
             delete: false,
             modifyName: {}
         })
+        wx.showTabBar();
     },
     getPicker: function(e) {
         this.setData({
@@ -544,9 +534,11 @@ Page({
                     this.setData({
                         thisOrz: {},
                         modifyCover: false,
+                        overflow: 'visible',
                         delete: false,
                         modifyName: {}
                     })
+                    wx.showTabBar();
                 } else {
                     wx.showModal({
                         title: '修改失败',

@@ -1,22 +1,20 @@
 //app.js
 App({
-
+    globalData: {
+        anthorize: false,
+        checkFlag: false,
+        userInfo: null
+    },
     onLaunch: function() {
-        //wx.hideTabBar();
         // 登录
         if (wx.getStorageSync('openid')) {
-            let that = this;
-            this.checkUser(wx.getStorageSync('openid'));
+            //this.checkUser(wx.getStorageSync('openid'));
 
             if (wx.getStorageSync('nickName')) {
-                // wx.navigateTo({
-                //     url: './pages/loading/loading'
-                // })
-                that.globalData.anthorize = true;
+                this.globalData.anthorize = true;
             }
             return false;
         }
-
         let that = this;
         wx.login({
             success: res => {
@@ -50,10 +48,14 @@ App({
         })
 
     },
+    onShow: function(e) {
+        if (wx.getStorageSync('openid')) {
+            this.checkUser(wx.getStorageSync('openid'));
+            this.getNewNews();
+        }
+    },
     checkUser: function(openid) {
-        //console.log('checkUser')
         wx.request({
-            // 必需
             url: 'https://bmtest.redrock.team/user/findbyopenid',
             data: {
                 openid: openid
@@ -64,7 +66,6 @@ App({
             },
             success: (res) => {
                 if (res.header.Authorization) {
-
                     this.globalData.checkFlag = true;
                     console.log('checkUser:', this.globalData.checkFlag)
                     wx.setStorage({
@@ -76,7 +77,6 @@ App({
                         data: res.data.stuid
                     })
 
-
                     wx.setStorage({
                         key: "phonenum",
                         data: res.data.phonenum
@@ -86,6 +86,8 @@ App({
                         key: 'stuname',
                         data: res.data.stuname
                     })
+
+                    this.getNewNews();
                 } else {
                     wx.hideTabBar();
                 }
@@ -96,7 +98,6 @@ App({
         })
     },
     getNewNews: function(e) {
-        let that = this;
         wx.request({
             url: 'https://bmtest.redrock.team/msg/cinfo',
             data: {
@@ -133,13 +134,51 @@ App({
             }
         })
     },
-    globalData: {
-        anthorize: false,
-        checkFlag: false,
-        userInfo: null
-    },
-    onShow: function(e) {
-        //wx.hideTabBar();
-        this.getNewNews();
+    checkInput: function(obj) {
+        let emptyFlag = false;
+        let effectiveIDFlag = false;
+        let effectivePhoneFlag = false;
+        let regu = "^[ ]+$";
+        let re = new RegExp(regu);
+
+        Object.keys(obj).forEach(function(key) {
+            //检查是否为空
+            if (obj[key].length === 0 || re.test(obj[key])) {
+                emptyFlag = true;
+                return;
+            }
+
+            //检查学号
+            if (key === 'stuid' && obj[key].length === 10 && obj[key].toString().slice(0, 3) === '201') {
+                effectiveIDFlag = true
+            }
+
+            //检查手机号
+            if (key === 'phonenum' && obj[key].length === 11 && obj[key].toString().slice(0, 1) === '1') {
+                effectivePhoneFlag = true
+            }
+        })
+
+        if (emptyFlag) {
+            wx.showModal({
+                title: '绑定失败',
+                content: '必填项内容不能为空',
+                showCancel: false
+            })
+        } else if (!effectiveIDFlag) {
+            wx.showModal({
+                title: '绑定失败',
+                content: '学号不合法',
+                showCancel: false
+            })
+        } else if (!effectivePhoneFlag) {
+            wx.showModal({
+                title: '绑定失败',
+                content: '手机号码不合法',
+                showCancel: false
+            })
+        } else {
+            return true;
+        }
     }
 })

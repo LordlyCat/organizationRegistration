@@ -2,8 +2,6 @@
 //获取应用实例
 const app = getApp()
 
-
-
 Page({
     data: {
         anthorize: app.globalData.anthorize,
@@ -14,6 +12,7 @@ Page({
         add: true,
         QR: false,
         QR_code: 0,
+        disabled: false,
         orgnazition: [{
             name: "校团委办公室",
             logo: '../../img/gongqingtuan.jpg',
@@ -74,77 +73,12 @@ Page({
             oname: '',
             dname: ''
         },
-        selected: [],
+        selected: [{
+            dname: '选择部门'
+        }],
         selectedIndex: 1
     },
     onLoad: function(e) {
-        console.log(e);
-        // wx.request({
-        //     // 必需
-        //     url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx51c8e3c6a32c81f1&secret=5db31c056cd0333c6aba9e5ae61e679b',
-        //     data: {
-
-        //     },
-        //     header: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     success: (res) => {
-        //         console.log("token", res)
-        //     },
-        //     fail: (res) => {
-
-        //     },
-        //     complete: (res) => {
-
-        //     }
-        // })
-        // 
-        // wx.request({
-        //     // 必需
-        //     url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${code}`,
-        //     data: {
-        //         scene: 123
-        //     },
-        //     header: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     method: 'POST',
-        //     success: (res) => {
-        //         console.log(res);
-        //     },
-        //     fail: (res) => {
-
-        //     },
-        //     complete: (res) => {
-
-        //     }
-        // })
-        // if (!this.data.anthorize) {
-        //     wx.hideTabBar();
-        // }
-        //wx.hideTabBar();
-        //console.log(wx.getStorageSync('openid'));
-        // if (!wx.getStorageSync('stuid')) {
-        //     this.setData({
-        //         switch: true,
-        //         cover: 'coverOn'
-        //     })
-        //     wx.hideTabBar();
-        // }
-        // console.log(app.globalData.checkFlag);
-        // if (app.globalData.checkFlag) {
-        //     this.setData({
-        //         cover: 'coverOff'
-        //     })
-        //     wx.showTabBar();
-        // } else {
-        //     this.setData({
-        //         switch: true,
-        //         cover: 'coverOn'
-        //     })
-        //     wx.hideTabBar();
-        // }
-
         let that = this;
         wx.getSetting({
             success: function(e) {
@@ -153,48 +87,48 @@ Page({
                     // wx.switchTab({
                     //     url: '../index/index'
                     // })
-                    setTimeout(() => {
-                        // wx.request({
-                        //     // 必需
-                        //     url: 'https://bmtest.redrock.team/user/findbyopenid',
-                        //     data: {
-                        //         openid: wx.getStorageSync('openid')
-                        //     },
-                        //     header: {
-                        //         'Content-Type': 'application/x-www-form-urlencoded'
-                        //     },
-                        //     method: 'POST',
-                        //     success: (res) => {
-                        //         console.log('user', res)
-                        //         console.log(res.header.Authorization)
-                        //         wx.setStorage({
-                        //             key: 'Authorization',
-                        //             data: res.header.Authorization
-                        //         })
-                        //         wx.setStorage({
-                        //             key: 'stuid',
-                        //             data: res.data.stuid
-                        //         })
-                        //         wx.setStorage({
-                        //             key: 'stuname',
-                        //             data: res.data.stuname
-                        //         })
-                        //         wx.setStorage({
-                        //             key: 'phonenum',
-                        //             data: res.data.phonenum
-                        //         })
-                        //     },
-                        //     fail: (res) => {
-                        //         console.log(res)
-                        //     },
-                        //     complete: (res) => {
+                    //setTimeout(() => {
+                    // wx.request({
+                    //     // 必需
+                    //     url: 'https://bmtest.redrock.team/user/findbyopenid',
+                    //     data: {
+                    //         openid: wx.getStorageSync('openid')
+                    //     },
+                    //     header: {
+                    //         'Content-Type': 'application/x-www-form-urlencoded'
+                    //     },
+                    //     method: 'POST',
+                    //     success: (res) => {
+                    //         console.log('user', res)
+                    //         console.log(res.header.Authorization)
+                    //         wx.setStorage({
+                    //             key: 'Authorization',
+                    //             data: res.header.Authorization
+                    //         })
+                    //         wx.setStorage({
+                    //             key: 'stuid',
+                    //             data: res.data.stuid
+                    //         })
+                    //         wx.setStorage({
+                    //             key: 'stuname',
+                    //             data: res.data.stuname
+                    //         })
+                    //         wx.setStorage({
+                    //             key: 'phonenum',
+                    //             data: res.data.phonenum
+                    //         })
+                    //     },
+                    //     fail: (res) => {
+                    //         console.log(res)
+                    //     },
+                    //     complete: (res) => {
 
-                        //     }
-                        // })
-                        // wx.switchTab({
-                        //     url: '../index/index'
-                        // })
-                    }, 1500)
+                    //     }
+                    // })
+                    // wx.switchTab({
+                    //     url: '../index/index'
+                    // })
+                    //}, 1500)
                 } else {
                     app.globalData.anthorize = false;
                     that.setData({
@@ -218,11 +152,33 @@ Page({
         }
     },
     onShow: function(e) {
+        // for (let i = 0; i < 100; i += 2) {
+        //     wx.request({
+        //         // 必需
+        //         url: 'https://bmtest.redrock.team/469bba0a564235dfceede42db14f17b0/addinfo',
+        //         data: {
+        //             cid: i,
+        //             info: "一款基于O2O模式下的重邮组织社团招新报名小程序，简化了报名流程，强化了推送模板，实现了“无纸化”的新互联网运营模式。"
+        //         },
+        //         header: {
+        //             'Content-Type': 'application/x-www-form-urlencoded'
+        //         },
+        //         method: "POST",
+        //         success: (res) => {
+        //             console.log(1);
+        //         },
+        //         fail: (res) => {
+
+        //         },
+        //         complete: (res) => {
+
+        //         }
+        //     })
+        // }
 
     },
     getUserInfoss: function(e) {
-        //console.log(app.globalData.checkFlag)
-        //console.log(e.detail.rawData);
+
         if (!app.globalData.checkFlag) {
             wx.hideTabBar();
             this.setData({
@@ -247,16 +203,12 @@ Page({
             key: "avatarUrl",
             data: JSON.parse(e.detail.rawData).avatarUrl
         })
-        // wx.switchTab({
-        //     url: '../index/index'
-        // })
     },
     register: function(e) {
         this.goToJoin(e.currentTarget.dataset.index);
     },
     goToJoin: function(e) {
         wx.hideTabBar();
-        console.log(e);
         let data = this.data;
         this.setData({
             index: e,
@@ -271,14 +223,21 @@ Page({
         })
     },
     addWanted: function(e) {
-        let wanted = ++this.data.wanted
+        let wanted = ++this.data.wanted;
+        let selected = this.data.selected;
+        selected[wanted - 1] = {
+            dname: '选择部门'
+        }
         this.setData({
-            wanted: wanted
+            wanted: wanted,
+            selected: selected
         })
     },
     cancel: function(e) {
         this.setData({
-            selected: [],
+            selected: [{
+                dname: '选择部门'
+            }],
             cover: 'coverOff',
             overflow: 'visible',
             wanted: 1
@@ -287,7 +246,6 @@ Page({
     },
     selectStatement: function(e) {
         let data = this.data;
-        console.log(e.currentTarget.dataset.index)
         this.setData({
             add: false,
             selectedIndex: e.currentTarget.dataset.index,
@@ -298,31 +256,8 @@ Page({
         })
     },
     submitInformation: function() {
-
-        let flag = false;
         let obj = this.data.information;
-        let regu = "^[ ]+$";
-        let re = new RegExp(regu);
-        Object.keys(obj).forEach(function(key) {
-            if (key !== 'phonenum') {
-                if (obj[key].length === 0 || re.test(obj[key])) {
-                    flag = true;
-                    return;
-                }
-            }
-        })
-
-        if (obj["phonenum"].length === 0 || re.test(obj["phonenum"])) {
-            obj["phonenum"] = "--";
-        }
-
-        if (flag) {
-            wx.showModal({
-                title: '绑定失败',
-                content: '必填项内容不能为空',
-                showCancel: false
-            })
-        } else {
+        if (app.checkInput(obj)) {
             wx.showLoading({
                 title: '加载中',
                 mask: true
@@ -340,7 +275,6 @@ Page({
                 success: (res) => {
                     console.log("seccess", res);
                     if (!res.header.Authorization) {
-                        console.log("sign fail");
                         wx.hideLoading();
                         wx.showModal({
                             title: '绑定失败',
@@ -356,7 +290,6 @@ Page({
                             console.log("setFirst")
                         }
                     });
-                    //console.log('set1', res.header.Authorization)
                     wx.hideLoading();
                     wx.showToast({
                         title: '绑定成功',
@@ -439,7 +372,7 @@ Page({
         })
     },
     chooseStatement: function(e) {
-
+        console.log('choose:', e);
         let data = this.data;
 
         this.setData({
@@ -464,31 +397,40 @@ Page({
             selected: selected,
             add: true
         }, function(e) {
-            //console.log(that.data.selected);
-            // wx.showToast({
-            //     title: '添加成功',
-            //     icon: 'success',
-            //     duration: 1000,
-            //     mask: false
-            // })
+
         })
+    },
+    move: function(e) {
+        //避免微信垃圾控件因滑动过快不能及时获取到值
+        this.setData({
+            disabled: true
+        })
+        let that = this;
+        setTimeout(function(e) {
+            that.setData({
+                disabled: false
+            })
+        }, 1000)
     },
     send: function(e) {
         let that = this;
         console.log(this.data.selected)
         let selected = this.data.selected;
-        if (selected.length === 0) {
+        let dataArr = [];
+        for (let i = 0; i < selected.length; i++) {
+            if (selected[i].oname) {
+                dataArr[i] = selected[i]
+            }
+        }
+        if (dataArr.length === 0) {
             return
         }
         wx.showLoading({
             title: '加载中',
             mask: true
         })
-        this.setData({
-            wanted: 1,
-            selected: []
-        });
-        let promises = selected.map(function(e) {
+
+        let promises = dataArr.map(function(e) {
             return new Promise(function(resolve, reject) {
                 wx.request({
                     // 必需
@@ -503,9 +445,6 @@ Page({
                         Authorization: wx.getStorageSync('Authorization')
                     },
                     success: (res) => {
-
-                        console.log(res);
-
                         if (res.data == 200) {
                             resolve();
                         } else {
@@ -521,32 +460,45 @@ Page({
                 })
             })
         })
-        Promise.all(promises).then(function(e) {
-            console.log(1111111)
-            wx.hideLoading();
-            wx.showToast({
-                title: '报名成功',
-                icon: 'success',
-                duration: 2000,
-                mask: true
-            });
-            that.setData({
-                cover: "coverOff",
-                overflow: 'visible',
+        Promise
+            .all(promises)
+            .then(function(e) {
+                wx.showToast({
+                    title: '报名成功',
+                    icon: 'success',
+                    duration: 1250,
+                    mask: true
+                });
+                that.setData({
+                    cover: "coverOff",
+                    overflow: 'visible',
+                })
+                wx.showTabBar();
+                wx.hideLoading();
+                that.setData({
+                    wanted: 1,
+                    selected: [{
+                        dname: '选择部门'
+                    }]
+                });
             })
-            wx.showTabBar();
-        }).catch(function(err) {
+            .catch(function(err) {
 
-            console.log(err);
-            console.log('0000000');
-            wx.hideLoading();
-            wx.showToast({
-                title: '报名失败',
-                icon: 'success',
-                duration: 2000,
-                mask: true
+                console.log(err);
+                wx.showToast({
+                    title: '报名失败',
+                    icon: 'success',
+                    duration: 2000,
+                    mask: true
+                })
+                wx.hideLoading();
+                that.setData({
+                    wanted: 1,
+                    selected: [{
+                        dname: '选择部门'
+                    }]
+                });
             })
-        })
     },
     getUserInfo: function(e) {}
 })
