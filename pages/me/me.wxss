@@ -97,6 +97,7 @@ page {
     background: white;
     box-shadow: 0 8px 20px 0 #E5EDF6;
     margin: 14rpx auto;
+    margin-bottom: 20rpx;
     padding-bottom: 30rpx;
 }
 
