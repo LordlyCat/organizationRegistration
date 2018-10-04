@@ -10,6 +10,10 @@ let redrock = `重庆邮电大学“红岩网校工作站”作为学校唯一�
 
 Page({
     data: {
+        height: '70rpx',
+        selected: '校团委办公室',
+        current: 0,
+        pullIcon: '../../img/PullTop.png',
         src: {
             src_1: "../../img/icon1_on.png",
             src_2: "../../img/icon2.png",
@@ -53,5 +57,29 @@ Page({
             logo: "../../img/dxsyst_banner.png",
             dec: "重庆邮电大学大学生艺术团是在校团委直接指导管理下的学生艺术团体，肩负组织学校重大文艺活动，代表学校对外联谊，演出和参加省市文艺大赛的重任。秉承“服务同学，锻炼自我”的宗旨，以丰富校园文化生活，陶冶情操，加强与其他院校艺术交流与沟通，为校宣传争光，活跃人文气氛等为前提，要求每个成员在艺术实践中以高标准、严要求的态度约束自己。大学生艺术团由管乐团、民乐团、舞蹈团、合唱团、话剧团、综合部组成。主要承担着我校各项大型演出任务，组织编排各项文艺节目，为有文艺特长的同学搭建良好的交流和展示平台，每个分团都有固定的训练时间和专业指导老师。近年来，大学生艺术团一次次圆满完成学校交给的各项文艺演出任务，并锻炼和培养了一批批艺术人才。为我校大学生文艺素质的培养，树立了一面旗帜。"
         }]
+    },
+    showList: function() {
+        //console.log(wx.createAnimation())
+        if (this.data.height == '70rpx') {
+            this.setData({
+                height: '510rpx'
+            })
+        } else {
+            this.setData({
+                height: '70rpx'
+            })
+        }
+    },
+    getSelected(e) {
+        this.setData({
+            selected: e.target.dataset.oname,
+            current: e.target.dataset.current
+        })
+    },
+    onChange(e) {
+        console.log(e.detail)
+        this.setData({
+            selected: this.data.orgnazition[e.detail.current].name
+        })
     }
 })

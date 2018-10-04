@@ -51,7 +51,7 @@ Page({
         }, {
             name: "红岩网校工作站",
             logo: "../../img/redRockLogo.png",
-            statement: ['产品策划运营部',
+            statement: ['产品策划及运营部',
                 '视觉设计部', 'Web研发部', '移动开发部', '运维安全部'
             ],
             dec: "在重庆邮电大学，有一个神秘的组织———红岩网校工作站，那里的人经常抱着电脑行色匆匆的游走在校园。"
@@ -84,6 +84,11 @@ Page({
             success: function(e) {
 
                 if (wx.getStorageSync('nickName')) {
+                    // wx.getUserInfo({
+                    //     success: function(res) {
+                    //         console.log(res);
+                    //     }
+                    // })
                     // wx.switchTab({
                     //     url: '../index/index'
                     // })
@@ -178,7 +183,7 @@ Page({
 
     },
     getUserInfoss: function(e) {
-
+        console.log(e);
         if (!app.globalData.checkFlag) {
             wx.hideTabBar();
             this.setData({

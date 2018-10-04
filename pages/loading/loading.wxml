@@ -2,5 +2,5 @@
 <image class="enter" src="../../img/enter.png" mode="scaleToFill"></image>
 <image class="appName" src="../../img/qcyy.png" mode="scaleToFill"></image>
 <image class="desc" src="../../img/words.png" mode="scaleToFill"></image>
-<button open-type="getUserInfo" style="margin-top: 300rpx;" bindgetuserinfo="getUserInfoss"><image class="btnImg" src="../../img/enterBtn.png" mode="scaleToFill"></image></button>
+<button open-type="getUserInfo" style="margin-top: 300rpx;" bindgetuserinfo="getUserInfoss" data-withCredentials='true'><image class="btnImg" src="../../img/enterBtn.png" mode="scaleToFill"></image></button>
 <text>@红岩网校工作站</text>

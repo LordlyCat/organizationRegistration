@@ -18,7 +18,8 @@ App({
         let that = this;
         wx.login({
             success: res => {
-                console.log(res)
+                //console.log(res)
+                //return false;
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
                 if (res.code) {
                     //拿openID
@@ -32,13 +33,13 @@ App({
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         success: function(res) {
-                            console.log(res);
+                            //console.log(res);
                             that.checkUser(res.data);
                             wx.setStorage({
                                 key: "openid",
                                 data: res.data,
                                 success: () => {
-                                    console.log('openid:', res.data)
+                                    //console.log('openid:', res.data)
                                 }
                             })
                         }
@@ -67,7 +68,7 @@ App({
             success: (res) => {
                 if (res.header.Authorization) {
                     this.globalData.checkFlag = true;
-                    console.log('checkUser:', this.globalData.checkFlag)
+                    //console.log('checkUser:', this.globalData.checkFlag)
                     wx.setStorage({
                         key: "Authorization",
                         data: res.header.Authorization
@@ -140,6 +141,8 @@ App({
         let effectivePhoneFlag = false;
         let regu = "^[ ]+$";
         let re = new RegExp(regu);
+
+        //((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\D])|(18[0-9])|(198))\d{8}
 
         Object.keys(obj).forEach(function(key) {
             //检查是否为空
