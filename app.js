@@ -8,7 +8,6 @@ App({
     onLaunch: function() {
         // 登录
         if (wx.getStorageSync('openid')) {
-            //this.checkUser(wx.getStorageSync('openid'));
 
             if (wx.getStorageSync('nickName')) {
                 this.globalData.anthorize = true;
@@ -68,6 +67,7 @@ App({
             success: (res) => {
                 if (res.header.Authorization) {
                     this.globalData.checkFlag = true;
+                    console.log(res.data);
                     //console.log('checkUser:', this.globalData.checkFlag)
                     wx.setStorage({
                         key: "Authorization",
@@ -83,10 +83,10 @@ App({
                         data: res.data.phonenum
                     })
 
-                    wx.setStorage({
-                        key: 'stuname',
-                        data: res.data.stuname
-                    })
+                    // wx.setStorage({
+                    //     key: 'stuname',
+                    //     data: res.data.stuname
+                    // })
 
                     this.getNewNews();
                 } else {

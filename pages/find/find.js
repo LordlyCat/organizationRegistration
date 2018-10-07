@@ -13,6 +13,7 @@ Page({
         height: '70rpx',
         selected: '校团委办公室',
         current: 0,
+        animation: {},
         pullIcon: '../../img/PullTop.png',
         src: {
             src_1: "../../img/icon1_on.png",
@@ -56,6 +57,14 @@ Page({
             name: "大学生艺术团",
             logo: "../../img/dxsyst_banner.png",
             dec: "重庆邮电大学大学生艺术团是在校团委直接指导管理下的学生艺术团体，肩负组织学校重大文艺活动，代表学校对外联谊，演出和参加省市文艺大赛的重任。秉承“服务同学，锻炼自我”的宗旨，以丰富校园文化生活，陶冶情操，加强与其他院校艺术交流与沟通，为校宣传争光，活跃人文气氛等为前提，要求每个成员在艺术实践中以高标准、严要求的态度约束自己。大学生艺术团由管乐团、民乐团、舞蹈团、合唱团、话剧团、综合部组成。主要承担着我校各项大型演出任务，组织编排各项文艺节目，为有文艺特长的同学搭建良好的交流和展示平台，每个分团都有固定的训练时间和专业指导老师。近年来，大学生艺术团一次次圆满完成学校交给的各项文艺演出任务，并锻炼和培养了一批批艺术人才。为我校大学生文艺素质的培养，树立了一面旗帜。"
+        }, {
+            name: "勤工助学中心",
+            logo: "../../img/qgzxzx_banner.png",
+            dec: "重庆邮电大学勤工助学中心（以下简称“中心”）隶属于重庆邮电大学党委学工部/学生处，在重庆邮电大学学生资助管理中心的指导下开展工作。中心以“帮困、励志、助学、强能”为宗旨，是学校帮助家庭经济困难学生、发挥学生“四自”作用、增强学生实践能力、培养学生创新创业意识、提升学生综合素质和促进学生全面成长成才的有效途径。中心现有5个职能性部门和4个经营性部门。以“阳光义教”、“生存挑战大赛”、“兼职招聘会”为品牌活动，学校每年提供校内勤工助学固定岗位酬劳经费300万元，经营性部门经营收入全部用于勤工助学。学校现设有校内固定勤工岗位1500余个。中心免费提供校外兼职岗位并实际到岗工作2400余人次，学生校外兼职收益217万元以上。"
+        }, {
+            name: "重邮就业中心",
+            logo: "../../img/jyzx_banner.png",
+            dec: "就业指导服务中心学生助理团现分为综合支撑组、对外活动组、媒体运营组三个小组。由一名团长和三名副团长协助团长主持助理团的日常工作和团队建设，一名秘书长负责助理团的监管和督察工作，每组设有一名组长统筹安排小组相关事宜。各组的职责略有不同，但是日常职责任务都一样。"
         }]
     },
     showList: function() {
@@ -64,9 +73,23 @@ Page({
             this.setData({
                 height: '510rpx'
             })
+            let animation = wx.createAnimation({
+                duration: 200
+            });
+            animation.rotateZ(180).step();
+            this.setData({
+                animation: animation.export()
+            })
         } else {
             this.setData({
                 height: '70rpx'
+            })
+            let animation = wx.createAnimation({
+                duration: 200
+            });
+            animation.rotateZ(0).step();
+            this.setData({
+                animation: animation.export()
             })
         }
     },
@@ -77,7 +100,6 @@ Page({
         })
     },
     onChange(e) {
-        console.log(e.detail)
         this.setData({
             selected: this.data.orgnazition[e.detail.current].name
         })

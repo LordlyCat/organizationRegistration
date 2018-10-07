@@ -60,11 +60,21 @@ Page({
             logo: "../../img/dxsyst.jpg",
             statement: ['管乐团', '民乐团', '舞蹈团', '合唱团', '话剧团', '综合部'],
             dec: "重庆邮电大学大学生艺术团是在校团委直接指导管理下的学生艺术团体。"
+        }, {
+            name: "勤工助学中心",
+            logo: "../../img/qgzxzx.png",
+            statement: ['行政部', '宣传部', '策划部', '对外联络部', '失物招领部', '学生超市', '绿色书屋', '学生打印社', '文化产品部'],
+            dec: "勤工助学中心隶属于重庆邮电大学党委学工部/学生处，在重邮学生资助管理中心的指导下开展工作。"
+        }, {
+            name: "重邮就业中心",
+            logo: "../../img/jyzx.png",
+            statement: ['综合支撑组', '对外活动组', '媒体运营组'],
+            dec: '重邮就业中心将在10月28日开放报名，敬请期待。'
         }],
         wanted: 1,
         index: 0,
         information: {
-            stuname: '',
+            idnum: '',
             stuid: '',
             phonenum: ''
         },
@@ -84,56 +94,7 @@ Page({
             success: function(e) {
 
                 if (wx.getStorageSync('nickName')) {
-                    // wx.getUserInfo({
-                    //     success: function(res) {
-                    //         console.log(res);
-                    //     }
-                    // })
-                    // wx.switchTab({
-                    //     url: '../index/index'
-                    // })
-                    //setTimeout(() => {
-                    // wx.request({
-                    //     // 必需
-                    //     url: 'https://bmtest.redrock.team/user/findbyopenid',
-                    //     data: {
-                    //         openid: wx.getStorageSync('openid')
-                    //     },
-                    //     header: {
-                    //         'Content-Type': 'application/x-www-form-urlencoded'
-                    //     },
-                    //     method: 'POST',
-                    //     success: (res) => {
-                    //         console.log('user', res)
-                    //         console.log(res.header.Authorization)
-                    //         wx.setStorage({
-                    //             key: 'Authorization',
-                    //             data: res.header.Authorization
-                    //         })
-                    //         wx.setStorage({
-                    //             key: 'stuid',
-                    //             data: res.data.stuid
-                    //         })
-                    //         wx.setStorage({
-                    //             key: 'stuname',
-                    //             data: res.data.stuname
-                    //         })
-                    //         wx.setStorage({
-                    //             key: 'phonenum',
-                    //             data: res.data.phonenum
-                    //         })
-                    //     },
-                    //     fail: (res) => {
-                    //         console.log(res)
-                    //     },
-                    //     complete: (res) => {
 
-                    //     }
-                    // })
-                    // wx.switchTab({
-                    //     url: '../index/index'
-                    // })
-                    //}, 1500)
                 } else {
                     app.globalData.anthorize = false;
                     that.setData({
@@ -157,29 +118,6 @@ Page({
         }
     },
     onShow: function(e) {
-        // for (let i = 0; i < 100; i += 2) {
-        //     wx.request({
-        //         // 必需
-        //         url: 'https://bmtest.redrock.team/469bba0a564235dfceede42db14f17b0/addinfo',
-        //         data: {
-        //             cid: i,
-        //             info: "一款基于O2O模式下的重邮组织社团招新报名小程序，简化了报名流程，强化了推送模板，实现了“无纸化”的新互联网运营模式。"
-        //         },
-        //         header: {
-        //             'Content-Type': 'application/x-www-form-urlencoded'
-        //         },
-        //         method: "POST",
-        //         success: (res) => {
-        //             console.log(1);
-        //         },
-        //         fail: (res) => {
-
-        //         },
-        //         complete: (res) => {
-
-        //         }
-        //     })
-        // }
 
     },
     getUserInfoss: function(e) {
@@ -210,6 +148,10 @@ Page({
         })
     },
     register: function(e) {
+        if (e.currentTarget.dataset.index === 10 &&
+            new Date().setFullYear(2018, 9, 28) - new Date() > 0) {
+            return;
+        }
         this.goToJoin(e.currentTarget.dataset.index);
     },
     goToJoin: function(e) {
@@ -228,6 +170,10 @@ Page({
         })
     },
     addWanted: function(e) {
+        console.log(this.data.orgnazition[this.data.index].statement.length, this.data.wanted);
+        if (this.data.orgnazition[this.data.index].statement.length <= this.data.wanted) {
+            return false;
+        }
         let wanted = ++this.data.wanted;
         let selected = this.data.selected;
         selected[wanted - 1] = {
@@ -281,12 +227,21 @@ Page({
                 success: (res) => {
                     console.log("seccess", res);
                     if (!res.header.Authorization) {
+                        if (res.data.status === 201) {
+                            wx.showModal({
+                                title: '身份证后六位错误',
+                                content: '请重试',
+                                showCancel: false
+                            })
+                        }
+                        if (res.data.status === -100) {
+                            wx.showModal({
+                                title: '学号不合法',
+                                content: '请重试',
+                                showCancel: false
+                            })
+                        }
                         wx.hideLoading();
-                        wx.showModal({
-                            title: '绑定失败',
-                            content: '请重试',
-                            showCancel: false
-                        })
                         return;
                     }
                     wx.setStorage({
@@ -316,10 +271,10 @@ Page({
                         key: "phonenum",
                         data: obj.phonenum
                     });
-                    wx.setStorage({
-                        key: "stuname",
-                        data: obj.stuname
-                    });
+                    // wx.setStorage({
+                    //     key: "stuname",
+                    //     data: obj.stuname
+                    // });
                     if (this.data.QR) {
                         this.goToJoin(this.data.QR_code)
                     }
@@ -340,11 +295,11 @@ Page({
     },
     getInput: function(e) {
         switch (e.target.id) {
-            case "stuname":
+            case "idnum":
                 this.setData({
                     information: {
                         ...this.data.information,
-                        stuname: e.detail.value
+                        idnum: e.detail.value
                     }
                 })
                 break;
@@ -469,12 +424,17 @@ Page({
         Promise
             .all(promises)
             .then(function(e) {
-                wx.showToast({
+                // wx.showToast({
+                //     title: '报名成功',
+                //     icon: 'success',
+                //     duration: 1250,
+                //     mask: true
+                // });
+                wx.showModal({
                     title: '报名成功',
-                    icon: 'success',
-                    duration: 1250,
-                    mask: true
-                });
+                    content: '',
+                    showCancel: false
+                })
                 that.setData({
                     cover: "coverOff",
                     overflow: 'visible',
@@ -491,11 +451,16 @@ Page({
             .catch(function(err) {
 
                 console.log(err);
-                wx.showToast({
+                // wx.showToast({
+                //     title: '报名失败',
+                //     icon: 'success',
+                //     duration: 2000,
+                //     mask: true
+                // })
+                wx.showModal({
                     title: '报名失败',
-                    icon: 'success',
-                    duration: 2000,
-                    mask: true
+                    content: '',
+                    showCancel: false
                 })
                 wx.hideLoading();
                 that.setData({

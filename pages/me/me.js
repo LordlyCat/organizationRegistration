@@ -25,7 +25,7 @@ Page({
         more2: '../../img/pick.png',
         orgnazition: [],
         newPersonal: {
-            stuname: '',
+            idnum: '',
             stuid: '',
             phonenum: ''
         },
@@ -58,6 +58,12 @@ Page({
         }, {
             name: "学生社团联合会",
             statement: ['综合部', '宣传部', '社团服务部', '社团活动部']
+        }, {
+            name: "勤工助学中心",
+            statement: ['行政部', '宣传部', '策划部', '对外联络部', '失物招领部', '学生超市', '绿色书屋', '学生打印社', '文化产品部']
+        }, {
+            name: "重邮就业中心",
+            statement: ['综合支撑组', '对外活动组', '媒体运营组']
         }],
         thisOrz: {}
     },
@@ -279,9 +285,9 @@ Page({
             overflow: 'hidden',
             stuid: wx.getStorageSync('stuid'),
             phonenum: wx.getStorageSync('phonenum'),
-            stuname: wx.getStorageSync('stuname'),
+            //stuname: wx.getStorageSync('stuname'),
             newPersonal: {
-                stuname: '',
+                idnum: '',
                 stuid: '',
                 phonenum: ''
             }
@@ -296,11 +302,11 @@ Page({
     },
     getInput: function(e) {
         switch (e.target.id) {
-            case "stuname":
+            case "idnum":
                 this.setData({
                     newPersonal: {
                         ...this.data.newPersonal,
-                        stuname: e.detail.value
+                        idnum: e.detail.value
                     }
                 })
                 break;
@@ -367,7 +373,7 @@ Page({
                         mask: true
                     })
                     that.setData({
-                        stuname: newPersonal.stuname,
+                        //stuname: newPersonal.stuname,
                         stuid: newPersonal.stuid,
                         phonenum: newPersonal.phonenum
                     })
@@ -380,10 +386,10 @@ Page({
                         data: newPersonal.phonenum
                     })
 
-                    wx.setStorage({
-                        key: 'stuname',
-                        data: newPersonal.stuname
-                    })
+                    // wx.setStorage({
+                    //     key: 'stuname',
+                    //     data: newPersonal.stuname
+                    // })
                     wx.showTabBar();
                 } else {
                     wx.showModal({
@@ -391,6 +397,7 @@ Page({
                         content: '请重试',
                         showCancel: false
                     })
+                    wx.showTabBar();
                 }
             },
             fail: (res) => {
@@ -399,12 +406,14 @@ Page({
                     content: '请重试',
                     showCancel: false
                 })
+                wx.showTabBar();
             },
             complete: (res) => {
                 that.setData({
                     cover: false,
                     overflow: 'visible'
-                })
+                });
+                wx.showTabBar();
             }
         })
     },

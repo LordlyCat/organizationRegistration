@@ -62,12 +62,12 @@
             <view class="information username">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/user.png" mode="scaleToFill"></image>
-                <input id="stuname" bindinput="getInput" type="text" placeholder="姓名" placeholder-class="placeholder" confirm-type="next"></input>
+                <input id="stuid" bindinput="getInput" type="number" placeholder="学号" placeholder-class="placeholder" confirm-type="next"></input>
             </view>
             <view class="information studentID">
                 <text class="asterisk">*</text>
                 <image class="icon" src="../../img/studentID.png" mode="scaleToFill"></image>
-                <input id="stuid" bindinput="getInput" type="number" placeholder="学号" placeholder-class="placeholder"></input>
+                <input id="idnum" bindinput="getInput" type="text" placeholder="身份证后六位" placeholder-class="placeholder"></input>
             </view>
             <view class="information phoneNumber">
                 <text class="asterisk">*</text>

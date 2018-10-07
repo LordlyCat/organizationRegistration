@@ -4,8 +4,9 @@ page {
 }
 
 .wrapper {
+    overflow: hidden;
     /*background: #F3F8FD;*/
-    height: 100px;
+    height: 100vh;
 }
 
 
@@ -33,7 +34,7 @@ swiper-item {
     margin: 40rpx auto;
     margin-bottom: 30rpx;
     /*border: solid 1rpx lightgray;*/
-    box-shadow: 0 0 10rpx lightgray; 
+    box-shadow: 0 0 10rpx lightgray;
 }
 
 .box .orgnazitionName {
@@ -66,6 +67,7 @@ swiper-item {
     left: 36.5rpx;
     width: 677rpx;
     background: white;
+    font-size: 33rpx;
     text-align: center;
     transition: height 0.3s;
     box-shadow: 0rpx 0rpx 15rpx 15rpx #F3F8FD;
@@ -76,7 +78,7 @@ swiper-item {
     height: 360rpx;
 }
 
-.select .list{
+.select .list {
     width: 80%;
     height: 70rpx;
     margin: 0 auto;
@@ -85,11 +87,16 @@ swiper-item {
     border-bottom: solid 1rpx rgba(0, 0, 0, 0.1);
 }
 
-.select .list:hover{
+.select .list:hover {
     color: #9B9B9B;
 }
 
-.selectedList{
+.select text {
+    font-size: 15rpx;
+    opacity: 0.667;
+}
+
+.selectedList {
     position: relative;
     width: 100%;
     height: 80rpx;
@@ -100,7 +107,7 @@ swiper-item {
     margin-bottom: 15px;
 }
 
-.pull{
+.pull {
     position: absolute;
     width: 40rpx;
     height: 80%;
